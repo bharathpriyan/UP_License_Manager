@@ -28,6 +28,7 @@ var makeBorderNone = "none";
 var ageLimitMin = 18;
 var ageLimitMax = 100;
 var licenseExpiryPeriodInYears = 20;
+var logoutTimeInMilliSecs = 60000;
 
 
 
