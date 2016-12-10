@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin</title>
+<link href="css/Admin.css" rel="stylesheet" />
+</head>
+<body id="mainBody">
+<div id="userInputContainer">
+<div id="formTitle"><span>Register new user</span></div>
+<div id="tableContainer">
+<table id="userFormDetails">
+<tr><td class="userFieldLable">Driving School Name&nbsp;:&nbsp;</td><td><input type="text" id="drivingSchoolName" class="userInputClass"/></td></tr>
+<tr><td class="userFieldLable">Name&nbsp;:&nbsp;</td><td><input type="text" id="firstName" class="userInputClass" placeholder="first name"/><input type="text" id="lastName" class="userInputClass" placeholder="last name"/></td></tr>
+<tr><td class="userFieldLable">User Name&nbsp;<span style="color:red;">*</span>:&nbsp;</td><td><input type="text" id="userName" class="userInputClass" required="required"/></td></tr>
+<tr><td class="userFieldLable">Password&nbsp;<span style="color:red;">*</span>:&nbsp;</td><td><input type="password" id="password" class="userInputClass" required="required"/></td></tr>
+<tr><td class="userFieldLable">Mobile Number&nbsp;<span style="color:red;">*</span>:&nbsp;</td><td><input type="tel" id="mobNumber" maxlength="10" class="userInputClass"/></td></tr>
+<tr><td class="userFieldLable">Alternate Mobile Number&nbsp;:&nbsp;</td><td><input type="tel" id="altMobNumber" maxlength="10" class="userInputClass"/></td></tr>
+<tr><td class="userFieldLable">Email&nbsp;:&nbsp;</td><td><input type="email" id="emailId" class="userInputClass" placeholder="abc@gmail.com"/></td></tr>
+</table>
+</div>
+<div id="saveButtonContainer">
+<div id="saveDetails" onclick="saveListener()">Register</div>
+<div id="resetInputs" onclick="resetInputs()">Reset</div>
+</div>
+<div id="infoToUserContainer">
+</div>
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/Constants.js"></script>
+<script src="js/Admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+body
+{
+	margin: 0px;
+	width: 100%;
+	height: 100%;	
+}
+#userInputContainer
+{
+	width: 50%;
+    border: 2px solid #5B5B5B;
+    margin-left: 20%;
+    padding: 2%;
+    border-radius: 10px;
+    margin-top: 2%;
+    background-color: #3498DB;
+    font-size: 15px;
+    font-family: helvatica, Arial;
+    color: white;
+}
+.userInputClass
+{
+    width: 85%;
+    border: none;
+    height: 25px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 2px;
+    font-size: 15px;
+}
+
+.userFieldLable
+{
+	width: 30%;
+}
+
+#userFormDetails
+{
+	width: 100%;
+	border-collapse: collapse;
+}
+#userFormDetails td{
+	padding: 2px 0px 2px 0px;
+}
+#licenseType, #gender
+{
+	width: 85%;
+	height: 25px;
+	background-color: white;
+	border: none;
+}
+#saveButtonContainer
+{
+    width: 100%;
+    margin-top: 3%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+}
+#saveDetails
+{
+	border-radius: 5px;
+    background-color: #0c57f9;
+    font-size: 15px;
+    font-family: helvatica,Arial;
+    color: white;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    float: right;
+    width: 15%;
+    margin-right: 20%;
+}
+#resetInputs{
+	border-radius: 5px;
+    background-color: #00363a;
+    font-size: 15px;
+    font-family: helvatica,Arial;
+    color: white;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    float: left;
+    width: 15%;
+    margin-left: 20%;
+}
+#copyAddress{
+    width: 20px;
+    cursor:pointer;
+}
+#infoToUserContainer{
+    background-color: #4286f4;
+    font-size: 15px;
+    font-family: helvatica,Arial;
+    color: white;
+    text-align: center;
+    height: 45px;
+    width: 200px;
+    display: none;
+    position: absolute;
+    border-radius: 10px;
+    padding: 5px 3px 3px 5px;
+}
+#firstName{
+	width: 41%;
+}
+#lastName{
+	width: 41%;
+	margin-left:0.5%
+}

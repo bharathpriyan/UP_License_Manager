@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Reports</title>
+<link href="css/dataTables.jqueryui.css" rel="stylesheet" />
+<link href="css/Reports.css" rel="stylesheet" />
+</head>
+<body>
+<div id="getReportContainer">
+<table id="reportConfigTable">
+<tr><td id="daysLable">Licenses Expiring in&nbsp;:&nbsp;</td>
+<td><select id="reportDate" onchange="fetchReports();">
+<option selected="selected" value="30">30</option>
+<option value="60">60</option>
+<option value="90">90</option>
+<option value="120">120</option>
+<option value="150">150</option>
+</select><span>&nbsp;&nbsp;&nbsp;days</span></td></tr>
+</table>
+</div>
+<div id="userListTablecontainer">
+<div id="tableHolder">
+</div>
+</div>
+<div id="buttonContainer">
+<div id="renewBtn" onclick="renewSelectedUsers()">Renew</div>
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/Constants.js"></script>
+<script src="js/Reports.js"></script>
+</body>
+</html>

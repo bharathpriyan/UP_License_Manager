@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DL Manager</title>
+<link href="css/DLHeader.css" rel="stylesheet" />
+</head>
+<body>
+<div id="headerContainer">
+<div id="appName"><span id="appNameSpan">DL Manager from Uzhavuparai</span><span id="appVersionSpan">v1.0</span></div>
+<div id="LoginDetails">Welcome <span id="loginNameSpan">Bharath..</span> &#128522;</div>
+<button id="logoutBtn" onclick="proceedToLogout()">Logout</button>
+</div>
+<div id="navigationContainer">
+<div id="freshTab" class="tabsClass" onclick="showFreshLicenseForm()"><span class="tabSpanClass" id="freshSpan">Fresh License</span></div>
+<div id="searchUserTab" class="tabsClass" onclick="showSearchUserScreen()"><span class="tabSpanClass" id="searchUserSpan">Search User</span></div>
+<div id="reportsTab" class="tabsClass" onclick="showReportsScreen()"><span class="tabSpanClass" id="reportsSpan">Reports</span></div>
+</div>
+<div id="iframeContainer">
+<iframe id="contentHolder">
+</iframe>
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/Constants.js"></script>
+<script src="js/DLHeader.js"></script>
+</body>
+</html>
