@@ -13,7 +13,7 @@ $(document).ready(function() {
 	proceedToLogout();
 	}
 
-	logoutTimer = setTimeout(proceedToLogout,30000);
+	logoutTimer = setTimeout(proceedToLogout,logoutTimeInMilliSecs);
 
 });
 
