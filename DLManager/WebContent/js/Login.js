@@ -1,4 +1,15 @@
 /**
+ * On Load Function
+ */
+$(document).ready(function() {
+	//proceed to application features if the user has already logged in
+	var loggedInUser = getCookie("userName");
+	if(loggedInUser){
+		proceedToApplicationFeatures();
+	}
+});
+
+/**
  * Servlet call to validate login credentials
  */
 function validateLogin(){
