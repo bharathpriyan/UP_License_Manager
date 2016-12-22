@@ -1,3 +1,5 @@
+var appVersion = "v1.0.0"
+
 /**
  * fresh License screen constants
  */
@@ -28,7 +30,7 @@ var makeBorderNone = "none";
 var ageLimitMin = 18;
 var ageLimitMax = 100;
 var licenseExpiryPeriodInYears = 20;
-var logoutTimeInMilliSecs = 60000;
+var logoutTimeInMilliSecs = 160000;
 
 
 

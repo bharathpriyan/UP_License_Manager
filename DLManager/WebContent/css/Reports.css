@@ -11,7 +11,9 @@ body {
 	text-align: center;
 	height: 100%;
 }
-
+.dataTables_scrollBody{
+	max-height: 290px !important;
+}
 .odd {
 	background-color: #dddddd !important;
 }
@@ -51,6 +53,7 @@ table.dataTable th {
 	color: #FFF;
 	border-radius: 6px;
 	font-size: 15px;
+	font-weight: bold;
 }
 
 #reportConfigTable {
@@ -74,10 +77,10 @@ table.dataTable th {
 }
 #buttonContainer
 {
-    width: 100%;
-    margin-top: 3%;
-    margin-left: 5%;
-    margin-bottom: 5%;
+	width: 100%;
+	margin-top: 1%;
+	margin-left: 5%;
+	margin-bottom: 5%;
 }
 #renewBtn
 {
@@ -92,4 +95,5 @@ table.dataTable th {
     cursor: pointer;
     float: left;
     width: 10%;
+    font-weight: bold;
 }

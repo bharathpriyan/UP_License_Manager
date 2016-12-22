@@ -2,7 +2,7 @@ var frameEl = document.getElementById("contentHolder");
 var logoutTimer = null;
 
 $(document).ready(function() {
-
+	document.getElementById("appVersionSpan").innerHTML = appVersion;
 	if(getCookie("userName")){
 	frameEl.src = "FreshLicense.html";
 	$("#freshTab").addClass("tabsClassSelected");

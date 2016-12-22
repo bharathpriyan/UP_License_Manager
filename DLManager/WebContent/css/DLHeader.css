@@ -68,18 +68,20 @@ body {
 .tabSpanClass{
 }
 #logoutBtn{
-    float: right;
-    display: inline-block;
-    position: relative;
-    margin-top: 1.5%;
-    margin-right: -8%;
-    width: 100px;
-    height: 20px;
-    font-weight: bold;
-    background-color: #5B5B5B;
-    color: white;
-    border-radius: 8px;
-    line-height: 10px;
+	float: right;
+	display: inline-block;
+	position: relative;
+	margin-top: 1.7%;
+	margin-right: -7%;
+	width: 100px;
+	height: 25px;
+	font-weight: bold;
+	background-color: #5B5B5B;
+	color: #FFF;
+	border-radius: 5px;
+}
+#logoutBtn:HOVER {
+	background-color: #000000;
 }
 #iframeContainer{
     width: 100%;
@@ -92,4 +94,16 @@ body {
 }
 .tabsClassSelected{
 	background-color: #019189;
+}
+#logoUP{
+	width: 20px;
+	height: 50px;
+	position: fixed;
+	right: 65%;
+}
+#copyRightInfo{
+	position: absolute;
+	font-size: 8px;
+	color: white;
+	right: 1%;
 }

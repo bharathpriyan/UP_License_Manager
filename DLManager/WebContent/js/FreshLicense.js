@@ -40,8 +40,8 @@ $(document).ready(function() {
 		var lisenceNumber = vars["lnumber"];
 		parent.selectFreshLisenceTab();
 		$.get('fetchUserDetails?lNumber='+lisenceNumber, function(returnData) {
-			//Assuming it is true
 			if(returnData){
+				setFieldsForUserDetailUpdate(returnData);
 			}else{
 				alert("Fetch user details failed due to connectivity issues..Please try again");
 			}
@@ -69,6 +69,27 @@ $(document).ready(function() {
 	});
 
 });
+/**
+ * If navigated from Search/Reports screen load the field values for update
+ * @param returnData
+ */
+function setFieldsForUserDetailUpdate(returnData){
+	
+	document.getElementById("firstName").value = "";
+	document.getElementById("lastName").value = "";
+	document.getElementById("age").value = "";
+	document.getElementById("mobNumber").value = "";
+	document.getElementById("alternateMobNumber").value = "";
+	document.getElementById("fatherHusbandName").value = "";
+	document.getElementById("licenseNumber").value = "";
+	document.getElementById("licenseType").value = "";
+	document.getElementById("permanentAddressLine1").value = "";
+	document.getElementById("permanentAddressLine2").value = "";
+	document.getElementById("permanentAddressPin").value = "";
+	document.getElementById("temporaryAddressLine1").value = "";
+	document.getElementById("temporaryAddressLine2").value = "";
+	document.getElementById("temporaryAddressPin").value = "";
+}
 
 /**
  * Set date fields
@@ -344,12 +365,11 @@ function resetInputs(){
 	document.getElementById("mobNumber").value = "";
 	document.getElementById("alternateMobNumber").value = "";
 	document.getElementById("fatherHusbandName").value = "";
-	document.getElementById("temporaryAddress").value = "";
-	document.getElementById("permanentAddress").value = "";
 	document.getElementById("licenseNumber").value = "";
 	document.getElementById("licenseType").value = "LMVH";
-
-	setInitialValues();
+	$(".pAddress").val("");
+	$(".tAddress").val("");
+	//setInitialValues();
 }
 /**
  * Display messages to the user
