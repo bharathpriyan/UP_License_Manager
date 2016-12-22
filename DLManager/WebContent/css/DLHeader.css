@@ -82,6 +82,7 @@ body {
 }
 #logoutBtn:HOVER {
 	background-color: #000000;
+	cursor: pointer;
 }
 #iframeContainer{
     width: 100%;
