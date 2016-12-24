@@ -3,15 +3,15 @@ var logoutTimer = null;
 
 $(document).ready(function() {
 	document.getElementById("appVersionSpan").innerHTML = appVersion;
-	if(getCookie("userName")){
+	//if(getCookie("userName")){
 	frameEl.src = "FreshLicense.html";
 	$("#freshTab").addClass("tabsClassSelected");
 	$("#searchUserTab").removeClass("tabsClassSelected");
 	$("#reportsTab").removeClass("tabsClassSelected");
 	document.getElementById("loginNameSpan").innerHTML = getCookie("userName");
-	}else{
-	proceedToLogout();
-	}
+	//}else{
+	//proceedToLogout();
+	//}
 
 	logoutTimer = setTimeout(proceedToLogout,logoutTimeInMilliSecs);
 
@@ -23,7 +23,10 @@ $('html').click(function(e) {
 });
 
 function proceedToLogout(){
-	//deleteCookie("userName");
+	var userNameCookie = getCookie("userName");
+	if(userNameCookie){
+		deleteCookie("userName");
+	}
 	window.location = "Login.html";
 }
 
