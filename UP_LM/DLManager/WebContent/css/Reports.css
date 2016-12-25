@@ -1,0 +1,99 @@
+html {
+	height: 100%;
+}
+
+body {
+	height: 97%;
+	font-family: helvatica, Arial;
+}
+
+#tableHolder {
+	text-align: center;
+	height: 100%;
+}
+.dataTables_scrollBody{
+	max-height: 290px !important;
+}
+.odd {
+	background-color: #dddddd !important;
+}
+
+input[type="search" i] {
+	min-width: 200px;
+}
+
+#reportsTable_filter {
+	background-color: #4286f4;
+	color: white;
+	margin-bottom: 0.5%;
+}
+
+table.dataTable th {
+    background-color: #57677f;
+    color: white;
+    border: 1px solid white;
+    font-family: helvatica, Arial;
+}
+
+#userListTablecontainer {
+	width: 90%;
+	margin: auto;
+}
+
+#reportsTable {
+	height: 80%;
+}
+
+#getReportContainer {
+	width: 30%;
+	float: left;
+	height: 7%;
+	margin: 1% 0px 0px 5%;
+	background-color: #4286F4;
+	color: #FFF;
+	border-radius: 6px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#reportConfigTable {
+	width: 100%;
+	vertical-align: middle;
+	margin-top: 1%;
+	position: relative;
+	margin-left: 1%;
+	text-align: center;
+}
+
+#daysLable {
+	width: 40%;
+}
+
+#reportDate {
+	width: 50%;
+}
+.userNameClass{
+	padding-left: 3%;
+}
+#buttonContainer
+{
+	width: 100%;
+	margin-top: 1%;
+	margin-left: 5%;
+	margin-bottom: 5%;
+}
+#renewBtn
+{
+	border-radius: 5px;
+    background-color: #4286f4;
+    font-size: 15px;
+    font-family: helvatica,Arial;
+    color: white;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    float: left;
+    width: 10%;
+    font-weight: bold;
+}
