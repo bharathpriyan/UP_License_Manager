@@ -3,26 +3,29 @@ var appVersion = "v1.0.0"
 /**
  * fresh License screen constants
  */
-var nameErrorMsg="We would like to know your customer's name &#128522;";
-var ageErrorMsg="We would like to know your customer's age as well..";
-var ageLimitErrorMsg="(S)He is too young to hold a license! &#128520;";
-var ageLimitErrorMsgMax="OMG!! (S)He is too old to hold a license!";
-var mobErrorMsg="Mobile number is as important as his/her name &#128516;";
-var mobLengthErrorMsg="Please enter a valid 10 digit mobile number! &#128555;";
-var altMobLengthErrorMsg="Please enter a valid 10 digit alternate mobile number! &#128555;";
-var licenseNumberErrorMsg="Every License will have a number. Doesn't it?! &#128557;";
-var copyAddressMsg = "Copy the permanent address to temporary address? &#128520;";
+var nameErrorMsg="Please enter customer name";
+var ageErrorMsg="Please enter customer's age";
+var ageLimitErrorMsg="Customer should be atleast 18 years old";
+var ageLimitErrorMsgMax="Customer is too old!";
+var mobErrorMsg="Mobile number field cannot be empty";
+var mobLengthErrorMsg="Please enter a valid 10 digit mobile number!";
+var altMobLengthErrorMsg="Please enter a valid 10 digit alternate mobile number!";
+var licenseNumberErrorMsg="Please enter a valid license number";
+var copyAddressMsg = "Copy the permanent address to temporary address?";
 var issuedDateErrorMsg = "License issued date cannot be empty!";
 var expireDateErrorMsg = "License expiry date cannot be empty!";
 var renewedDateErrorMsg = "License renewed date cannot be empty!";
+var addressLine1ErrorMsg = "Permanent address line 1 cannot be empty!";
+var addressLine2ErrorMsg = "Permanent address line 2 cannot be empty!";
+var pincodeErrorMsg = "Permanent address pin cannot be empty!";
 /**
  * Admin screen constants
  */
-var schoolNameErrorMsg="Please enter your school name &#128522;";
-var firstNameErrorMsg="Please enter your first name &#128522;";
-var userNameErrorMsg="Please choose a login username &#128522;";
-var passwordErrorMsg="Password cannot be empty &#128522;";
-var emailErrorMsg="Please enter a valid email &#128522;";
+var schoolNameErrorMsg="Please enter your school name";
+var firstNameErrorMsg="Please enter your first name";
+var userNameErrorMsg="Please choose a login username";
+var passwordErrorMsg="Password cannot be empty";
+var emailErrorMsg="Please enter a valid email";
 
 var errorBorderHighlight = "2px solid red";
 var makeBorderNone = "none";

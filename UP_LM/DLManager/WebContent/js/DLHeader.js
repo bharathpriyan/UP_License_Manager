@@ -10,6 +10,7 @@ $(document).ready(function() {
 		$("#reportsTab").removeClass("tabsClassSelected");
 		document.getElementById("loginNameSpan").innerHTML = getCookie("userName");
 		logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
+		logoutListener();
 	}
 	else{
 		proceedToLogout();
@@ -47,4 +48,13 @@ function showReportsScreen(){
 	$("#searchUserTab").removeClass("tabsClassSelected");
 
 	$("#reportsTab").addClass("tabsClassSelected");
+}
+
+function logoutListener(){
+	var userNameCookie = getCookie("userName");
+	if(!userNameCookie){
+		proceedToLogout();
+	}else{
+		setTimeout(logoutListener,5000);
+	}
 }

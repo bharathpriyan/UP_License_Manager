@@ -28,6 +28,26 @@ var monthArr = ["Jan","Feb","Mar","Apr","May","June","Jul","Aug","Sep","Oct","No
 var infoToUserEl = document.getElementById("infoToUserContainer");
 
 $(document).ready(function() {
+	
+	var copyAddEl = document.getElementById("copyAddress");
+	var btnOffset = $("#copyAddress").offset();
+
+	copyAddEl.onmouseover=function(){
+
+		infoToUserEl.innerHTML = copyAddressMsg;
+
+		$("#infoToUserContainer").css("top",btnOffset.top-10);
+		$("#infoToUserContainer").css("left",btnOffset.left+40);
+		$("#infoToUserContainer").css("display","block");
+	};
+	copyAddEl.onmouseout=function(){
+		$("#infoToUserContainer").css("display","none");
+	};
+
+	$( ".userInputClass" ).keyup(function() {
+		$("#infoToUserContainer").css("display","none");
+	});
+	
 	if(getCookie("userName")!=null){	
 		if(window.location.href.indexOf('?lnumber')>-1){
 			var vars = [], hash;
@@ -49,24 +69,6 @@ $(document).ready(function() {
 		}else{
 			//setInitialValues();
 		}
-		var copyAddEl = document.getElementById("copyAddress");
-		var btnOffset = $("#copyAddress").offset();
-	
-		copyAddEl.onmouseover=function(){
-	
-			infoToUserEl.innerHTML = copyAddressMsg;
-	
-			$("#infoToUserContainer").css("top",btnOffset.top-10);
-			$("#infoToUserContainer").css("left",btnOffset.left+40);
-			$("#infoToUserContainer").css("display","block");
-		};
-		copyAddEl.onmouseout=function(){
-			$("#infoToUserContainer").css("display","none");
-		};
-	
-		$( ".userInputClass" ).keyup(function() {
-			$("#infoToUserContainer").css("display","none");
-		});
 	}
 	else{
 		proceedToLogout();
@@ -213,7 +215,34 @@ function validateInputs()
 			return;
 		}
 	}
-
+	
+	var permanentAddressLine1 =	document.getElementById("permanentAddressLine1").value;
+	var permanentAddressLine2 =	document.getElementById("permanentAddressLine2").value;
+	var permanentAddressPin =	document.getElementById("permanentAddressPin").value;
+	if(permanentAddressLine1){
+		permanentAddressLine1ToDB = permanentAddressLine1;
+		document.getElementById("permanentAddressLine1").style.border = makeBorderNone;
+	}else{
+		displayErrorMessage("permanentAddressLine1",addressLine1ErrorMsg);
+		document.getElementById("permanentAddressLine1").style.border = errorBorderHighlight;
+		return;
+	}
+	if(permanentAddressLine2){
+		permanentAddressLine2ToDB = permanentAddressLine2;
+		document.getElementById("permanentAddressLine2").style.border = makeBorderNone;
+	}else{
+		displayErrorMessage("permanentAddressLine2",addressLine2ErrorMsg);
+		document.getElementById("permanentAddressLine2").style.border = errorBorderHighlight;
+		return;
+	}
+	if(permanentAddressPin){
+		permanentAddressPinToDB = permanentAddressPin;
+		document.getElementById("permanentAddressPin").style.border = makeBorderNone;
+	}else{
+		displayErrorMessage("permanentAddressPin",pincodeErrorMsg);
+		document.getElementById("permanentAddressPin").style.border = errorBorderHighlight;
+		return;
+	}
 
 	//validate customer License number
 	var customerLicenseNumber =	document.getElementById("licenseNumber").value;
@@ -265,18 +294,7 @@ function validateInputs()
 		document.getElementById("renewedDate").style.border = errorBorderHighlight;
 		return;
 	}
-	var permanentAddressLine1 =	document.getElementById("permanentAddressLine1").value;
-	var permanentAddressLine2 =	document.getElementById("permanentAddressLine2").value;
-	var permanentAddressPin =	document.getElementById("permanentAddressPin").value;
-	if(permanentAddressLine1){
-		permanentAddressLine1ToDB = permanentAddressLine1;
-	}
-	if(permanentAddressLine2){
-		permanentAddressLine2ToDB = permanentAddressLine2;
-	}
-	if(permanentAddressPin){
-		permanentAddressPinToDB = permanentAddressPin;
-	}
+
 	var temporaryAddressLine1 =	document.getElementById("temporaryAddressLine1").value;
 	var temporaryAddressLine2 =	document.getElementById("temporaryAddressLine2").value;
 	var temporaryAddressPin =	document.getElementById("temporaryAddressPin").value;
