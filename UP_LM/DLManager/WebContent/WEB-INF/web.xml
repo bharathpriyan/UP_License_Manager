@@ -22,6 +22,15 @@
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>FetchAllReports</servlet-name>
+    <servlet-class>com.dlmanager.FetchAllReports</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchAllReports</servlet-name>
+    <url-pattern>/FetchAllReports</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>AddNewCustomer</servlet-name>
     <servlet-class>com.dlmanager.AddNewCustomer</servlet-class>

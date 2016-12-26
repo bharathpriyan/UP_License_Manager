@@ -1,4 +1,5 @@
 var frameEl = document.getElementById("contentHolder");
+var logoutTimer = null;
 
 $(document).ready(function() {
 	document.getElementById("appVersionSpan").innerHTML = appVersion;
@@ -8,7 +9,7 @@ $(document).ready(function() {
 		$("#searchUserTab").removeClass("tabsClassSelected");
 		$("#reportsTab").removeClass("tabsClassSelected");
 		document.getElementById("loginNameSpan").innerHTML = getCookie("userName");
-		setTimeout(proceedToLogout,logoutTimeinMS);
+		logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
 	}
 	else{
 		proceedToLogout();
@@ -18,7 +19,7 @@ $(document).ready(function() {
 
 $('html').click(function(e) {                
 	clearTimeout(logoutTimer);
-	setTimeout(proceedToLogout,logoutTimeinMS);
+	logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
 });
 
 function showFreshLicenseForm(){

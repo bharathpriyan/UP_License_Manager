@@ -28,45 +28,49 @@ var monthArr = ["Jan","Feb","Mar","Apr","May","June","Jul","Aug","Sep","Oct","No
 var infoToUserEl = document.getElementById("infoToUserContainer");
 
 $(document).ready(function() {
-
-	if(window.location.href.indexOf('?lnumber')>-1){
-		var vars = [], hash;
-		var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-		for (var i = 0; i < hashes.length; i++) {
-			hash = hashes[i].split('=');
-			vars.push(hash[0]);
-			vars[hash[0]] = hash[1];
-		}
-		var lisenceNumber = vars["lnumber"];
-		parent.selectFreshLisenceTab();
-		$.get('fetchUserDetails?lNumber='+lisenceNumber, function(returnData) {
-			//Assuming it is true
-			if(returnData){
-			}else{
-				alert("Fetch user details failed due to connectivity issues..Please try again");
+	if(getCookie("userName")!=null){	
+		if(window.location.href.indexOf('?lnumber')>-1){
+			var vars = [], hash;
+			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+			for (var i = 0; i < hashes.length; i++) {
+				hash = hashes[i].split('=');
+				vars.push(hash[0]);
+				vars[hash[0]] = hash[1];
 			}
+			var lisenceNumber = vars["lnumber"];
+			parent.selectFreshLisenceTab();
+			$.get('fetchUserDetails?lNumber='+lisenceNumber, function(returnData) {
+				//Assuming it is true
+				if(returnData){
+				}else{
+					alert("Fetch user details failed due to connectivity issues..Please try again");
+				}
+			});
+		}else{
+			//setInitialValues();
+		}
+		var copyAddEl = document.getElementById("copyAddress");
+		var btnOffset = $("#copyAddress").offset();
+	
+		copyAddEl.onmouseover=function(){
+	
+			infoToUserEl.innerHTML = copyAddressMsg;
+	
+			$("#infoToUserContainer").css("top",btnOffset.top-10);
+			$("#infoToUserContainer").css("left",btnOffset.left+40);
+			$("#infoToUserContainer").css("display","block");
+		};
+		copyAddEl.onmouseout=function(){
+			$("#infoToUserContainer").css("display","none");
+		};
+	
+		$( ".userInputClass" ).keyup(function() {
+			$("#infoToUserContainer").css("display","none");
 		});
-	}else{
-		//setInitialValues();
 	}
-	var copyAddEl = document.getElementById("copyAddress");
-	var btnOffset = $("#copyAddress").offset();
-
-	copyAddEl.onmouseover=function(){
-
-		infoToUserEl.innerHTML = copyAddressMsg;
-
-		$("#infoToUserContainer").css("top",btnOffset.top-10);
-		$("#infoToUserContainer").css("left",btnOffset.left+40);
-		$("#infoToUserContainer").css("display","block");
-	};
-	copyAddEl.onmouseout=function(){
-		$("#infoToUserContainer").css("display","none");
-	};
-
-	$( ".userInputClass" ).keyup(function() {
-		$("#infoToUserContainer").css("display","none");
-	});
+	else{
+		proceedToLogout();
+	}
 
 });
 
@@ -309,7 +313,7 @@ function proceedToSave()
 		//Assuming it is true
 		if(returnData){
 			alert("Congrats! Your customer is added success fully..");
-			setTimeout(resetInputs(),10000);
+			setTimeout(resetInputs(),1000);
 		}else{
 			alert("User sign up failed :( due to connectivity issues..Please try again");
 		}

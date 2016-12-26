@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.uzhavupparai.dladmin.Admin;
+
 @SuppressWarnings("serial")
 public class AddNewCustomer extends HttpServlet{
 
@@ -20,46 +22,66 @@ public class AddNewCustomer extends HttpServlet{
 			throws javax.servlet.ServletException, java.io.IOException {
 		try {
 			String userData = URLDecoder.decode(request.getParameter("userData"),"UTF-8");
+			String customerFirstName ="";
+			String customerLastName ="";
+			String guardianName ="";
+			String customerAge ="";
+			String gender ="";
+			String mobileNumber ="";
+			String altMobileNumber ="";
+			String licenseNumber ="";
+			String licenseType ="";
+			String licenseIssuedDate ="";
+			String licenseExpiryDate ="";
+			String licensRenewedDate="";
+			String permanentAddressLine1="";
+			String permanentAddressLine2="";
+			String permanentAddressPin="";
+			String temporaryAddressLine1="";
+			String temporaryAddressLine2="";
+			String temporaryAddressPin="";
+			
 			if(userData.length()>0){
 				JSONObject newUserObj = new JSONObject(userData);
 				if(newUserObj instanceof JSONObject){
-					String customerFirstName = newUserObj.getString("customerFirstName");
-					String customerLastName = newUserObj.getString("customerLastName");
-					String guardianName = newUserObj.getString("guardianName");
-					String customerAge = newUserObj.getString("customerAge");
-					String gender = newUserObj.getString("gender");
-					String mobileNumber = newUserObj.getString("mobileNumber");
-					String altMobileNumber = newUserObj.getString("altMobileNumber");
-					String licenseNumber = newUserObj.getString("licenseNumber");
-					String licenseType = newUserObj.getString("licenseType");
-					String licenseIssuedDate = newUserObj.getString("licenseIssuedDate");
-					String licenseExpiryDate = newUserObj.getString("licenseExpiryDate");
-					String licensRenewedDate = newUserObj.getString("licensRenewedDate");
+					customerFirstName = newUserObj.getString("customerFirstName");
+					customerLastName = newUserObj.getString("customerLastName");
+					guardianName = newUserObj.getString("guardianName");
+					customerAge = newUserObj.getString("customerAge");
+					gender = newUserObj.getString("gender").substring(0,1).toUpperCase();
+					 mobileNumber = newUserObj.getString("mobileNumber");
+					altMobileNumber = newUserObj.getString("altMobileNumber");
+					licenseNumber = newUserObj.getString("licenseNumber");
+					licenseType = newUserObj.getString("licenseType");
+					licenseIssuedDate = newUserObj.getString("licenseIssuedDate");
+					licenseExpiryDate = newUserObj.getString("licenseExpiryDate");
+					licensRenewedDate = newUserObj.getString("licensRenewedDate");
 
 					JSONObject permenantAddress = newUserObj.getJSONObject("permenantAddress");
 					JSONObject temporaryAddress = newUserObj.getJSONObject("temporaryAddress");
 					if(permenantAddress instanceof JSONObject){
-						String permanentAddressLine1 = permenantAddress.getString("permanentAddressLine1");
-						String permanentAddressLine2 = permenantAddress.getString("permanentAddressLine2");
-						String permanentAddressPin = permenantAddress.getString("permanentAddressPin");
+						permanentAddressLine1 = permenantAddress.getString("permanentAddressLine1");
+						permanentAddressLine2 = permenantAddress.getString("permanentAddressLine2");
+						permanentAddressPin = permenantAddress.getString("permanentAddressPin");
 					}
 					if(temporaryAddress instanceof JSONObject){
-						String temporaryAddressLine1 = temporaryAddress.getString("temporaryAddressLine1");
-						String temporaryAddressLine2 = temporaryAddress.getString("temporaryAddressLine2");
-						String temporaryAddressPin = temporaryAddress.getString("temporaryAddressPin");
+						temporaryAddressLine1 = temporaryAddress.getString("temporaryAddressLine1");
+						temporaryAddressLine2 = temporaryAddress.getString("temporaryAddressLine2");
+						temporaryAddressPin = temporaryAddress.getString("temporaryAddressPin");
 					}
 				}
 			}
 
-			/*
-			 * start - return data to javascript
-			 */
-			response.setContentType("text/plain");
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write("true"); //send success or failure as true or false (string)
-			/*
-			 * end - return data to javascript
-			 */
+			Admin a = (Admin) request.getSession().getAttribute("validAdmin");
+			if(a.addCustomer(customerFirstName, customerLastName, guardianName, customerAge, gender, mobileNumber, 
+					altMobileNumber, licenseNumber, licenseType, licenseIssuedDate, licenseExpiryDate, 
+					licensRenewedDate, permanentAddressLine1, permanentAddressLine2,
+					permanentAddressPin, temporaryAddressLine1, temporaryAddressLine2, temporaryAddressPin)){
+			
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write("true"); //send success or failure as true or false (string)
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

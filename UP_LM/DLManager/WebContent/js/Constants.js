@@ -43,7 +43,7 @@ function proceedToLogout(){
 	$.post('Logout?', function(returnData) {
 		//Assuming it is true
 		if(returnData=="true"){
-			window.location = "Login.html";
+			location = "Login.html";		
 		}
 	});
 	
