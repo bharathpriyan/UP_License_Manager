@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DL Manager</title>
+<link href="css/FreshLicense.css" rel="stylesheet" />
+</head>
+
+<body id="mainBody">
+<div id="userInputContainer">
+<div id="tableContainer">
+<table id="userFormDetails">
+<tr><td class="userFieldLable">Name&nbsp;<span style="color:red;">*</span>:&nbsp;</td>
+<td><input type="text" id="firstName" class="userInputClass" required="required" placeholder=" first name"/>
+<input type="text" id="lastName" class="userInputClass" placeholder=" last name"/></td>
+</tr>
+<tr><td class="userFieldLable">Gender&nbsp;:&nbsp;</td>
+<td><select id="gender" onchange="captureGender();">
+<option selected="selected" value="Male">Male</option>
+<option value="Female">Female</option>
+<option value="ThirdGender">Third Gender</option>
+</select></td></tr>
+<tr><td class="userFieldLable">Father/Husband Name&nbsp;:&nbsp;</td><td><input type="text" id="fatherHusbandName" class="userInputClass"/></td></tr>
+<tr><td class="userFieldLable">Age&nbsp;:&nbsp;</td><td><input type="number" id="age" min="18" class="userInputClass"/></td></tr>
+<tr><td class="userFieldLable">Mobile Number&nbsp;<span style="color:red;">*</span>:&nbsp;</td><td><input type="tel" id="mobNumber" maxlength="10" class="userInputClass"/></td></tr>
+<tr><td class="userFieldLable">Alternate Mobile Number&nbsp;:&nbsp;</td><td><input type="tel" id="alternateMobNumber" maxlength="10" class="userInputClass"/></td></tr>
+<tr><td class="userFieldLable">Permanent Address&nbsp;:&nbsp;</td><td><input type="text" id="permanentAddressLine1"  class="userInputClass" placeholder=" Address line 1"/>
+</td></tr>
+<tr><td class="userFieldLable"></td><td><input type="text" id="permanentAddressLine2"  class="userInputClass" placeholder=" Address line 2"/>
+</td></tr>
+<tr><td class="userFieldLable"></td><td><input type="text" id="permanentAddressPin"  class="userInputClass" placeholder=" Postal code" maxlength="6"/>
+<input type="checkbox" id="copyAddress" onchange="copyPremAddressToTempAddress()"></td></tr>
+<tr><td class="userFieldLable">Temporary Address&nbsp;:&nbsp;</td><td><input type="text" id="temporaryAddressLine1"  class="userInputClass" placeholder=" Address line 1"/>
+</td></tr>
+<tr><td class="userFieldLable"></td><td><input type="text" id="temporaryAddressLine2"  class="userInputClass" placeholder=" Address line 2"/>
+</td></tr>
+<tr><td class="userFieldLable"></td><td><input type="text" id="temporaryAddressPin"  class="userInputClass" placeholder=" Postal code" maxlength="6"/></td></tr>
+<tr><td class="userFieldLable">License Number&nbsp;<span style="color:red;">*</span>:&nbsp;</td><td><input type="text" id="licenseNumber" class="userInputClass"/></td></tr>
+<tr><td class="userFieldLable">License Type&nbsp;:&nbsp;</td>
+<td><select id="licenseType" onchange="captureLicenseType();">
+<option selected="selected" value="LMVH">LMVH</option>
+<option value="MCWG">MCWG</option>
+<option value="Badge">Badge</option>
+<option value="HTV">HTV</option>
+<option value="HAZ">HAZ</option>
+</select></td></tr>
+<tr><td  class="userFieldLable">Issued Date&nbsp;:&nbsp;</td><td><input type="date" id="issuedDate" class="userInputClass" maxlength="11" /></td></tr>
+<tr><td class="userFieldLable">Expire Date&nbsp;:&nbsp;</td><td><input type="date" id="expireDate" class="userInputClass" maxlength="11"/></td></tr>
+<tr><td class="userFieldLable">Renewed Date&nbsp;:&nbsp;</td><td><input type="date" id="renewedDate" class="userInputClass" maxlength="11"/></td></tr>	
+</table>
+</div>
+<div id="saveButtonContainer">
+<div id="saveDetails" onclick="saveListener()">Save</div>
+<div id="resetInputs" onclick="resetInputs()">Reset</div>
+</div>
+<div id="infoToUserContainer">
+</div>
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/Constants.js"></script>
+<script src="js/FreshLicense.js"></script>
+</body>
+</html>

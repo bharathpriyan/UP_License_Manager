@@ -1,0 +1,20 @@
+html{
+	height: 100%;
+}
+body{
+	height: 97%;
+}
+#tableHolder{
+	text-align: center;
+	height: 100%;
+}
+.odd{
+	background-color: #dddddd !important;
+}
+#userListTablecontainer{
+    width: 90%;
+    margin: auto;
+}
+#reportsTable{
+	height: 80%;
+}
