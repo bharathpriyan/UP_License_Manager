@@ -49,4 +49,12 @@
     <url-pattern>/SignUp</url-pattern>
   </servlet-mapping>
   
+      <servlet>
+    <servlet-name>FetchUserDetails</servlet-name>
+    <servlet-class>com.dlmanager.FetchUserDetails</servlet-class>
+  </servlet>
+   <servlet-mapping>
+    <servlet-name>FetchUserDetails</servlet-name>
+    <url-pattern>/FetchUserDetails</url-pattern>
+  </servlet-mapping>
 </web-app>

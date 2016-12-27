@@ -58,10 +58,13 @@ $(document).ready(function() {
 				vars[hash[0]] = hash[1];
 			}
 			var lisenceNumber = vars["lnumber"];
-			parent.selectFreshLisenceTab();
-			$.get('fetchUserDetails?lNumber='+lisenceNumber, function(returnData) {
+//			parent.selectFreshLisenceTab();
+			$.get('FetchUserDetails?lNumber='+lisenceNumber, function(returnData) {
 				//Assuming it is true
 				if(returnData){
+					returnData = returnData.substring(1,returnData.length-1);
+					var returnArray = returnData.split(",");
+					setFieldsForUserDetailUpdate(returnArray);
 				}else{
 					alert("Fetch user details failed due to connectivity issues..Please try again");
 				}
@@ -76,12 +79,47 @@ $(document).ready(function() {
 
 });
 
+function setFieldsForUserDetailUpdate(returnData){
+	
+	document.getElementById("firstName").value = returnData[0].trim();
+	var tLNmae = returnData[1].trim();
+	document.getElementById("lastName").value = (tLNmae==="null"?"":tLNmae);
+	var tFHName = returnData[2].trim();
+	document.getElementById("fatherHusbandName").value = (tFHName==="null"?"":tFHName);
+	document.getElementById("age").value = returnData[3].trim();
+	document.getElementById("gender").value = returnData[4].trim()=='M'?"Male":"Female";
+	document.getElementById("mobNumber").value = returnData[5].trim();
+	var tAltMob = returnData[6].trim();
+	document.getElementById("alternateMobNumber").value = (tAltMob==="null"?"":tAltMob);
+	document.getElementById("licenseNumber").value = returnData[13].trim();
+	document.getElementById("licenseType").value = returnData[14].trim();
+	document.getElementById("permanentAddressLine1").value = returnData[7].trim();
+	var tPAdd2 = returnData[8].trim();
+	document.getElementById("permanentAddressLine2").value = (tPAdd2==="null"?"":tPAdd2);
+	document.getElementById("permanentAddressPin").value = returnData[9].trim();
+	var ttadd1 = returnData[10].trim();
+	var ttadd2 = returnData[11].trim();
+	var tPin = returnData[12].trim();
+	document.getElementById("temporaryAddressLine1").value = (ttadd1==="null"?"":ttadd1);
+	document.getElementById("temporaryAddressLine2").value = (ttadd2==="null"?"":ttadd2);
+	document.getElementById("temporaryAddressPin").value = (tPin==="null"?"":tPin);
+	document.getElementById("issuedDate").value = returnData[15].trim();
+	document.getElementById("expireDate").value = returnData[16].trim();
+	document.getElementById("renewedDate").value = returnData[17].trim();
+	
+	document.getElementById("saveDetails").innerHTML = "Update";
+}
+
 /**
  * Set date fields
  */
 function setInitialValues(){
 
 	var todaydate = new Date();
+	var expiryDate = new Date();
+	if(ageToDB<40){
+	expiryDate.setYear(todaydate.getYear()+10);
+	}
 
 	todayDateString = todaydate.getDate() + "-" +monthArr[todaydate.getMonth()]+ "-"+todaydate.getFullYear();
 
@@ -366,12 +404,11 @@ function resetInputs(){
 	document.getElementById("mobNumber").value = "";
 	document.getElementById("alternateMobNumber").value = "";
 	document.getElementById("fatherHusbandName").value = "";
-	document.getElementById("temporaryAddress").value = "";
-	document.getElementById("permanentAddress").value = "";
+	$(".pAddress").val("");
+	$(".tAddress").val("");
 	document.getElementById("licenseNumber").value = "";
 	document.getElementById("licenseType").value = "LMVH";
 
-	setInitialValues();
 }
 /**
  * Display messages to the user
