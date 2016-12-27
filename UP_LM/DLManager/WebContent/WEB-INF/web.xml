@@ -57,4 +57,12 @@
     <servlet-name>FetchUserDetails</servlet-name>
     <url-pattern>/FetchUserDetails</url-pattern>
   </servlet-mapping>
+        <servlet>
+    <servlet-name>UpdateCustomerDetail</servlet-name>
+    <servlet-class>com.dlmanager.UpdateCustomerDetail</servlet-class>
+  </servlet>
+   <servlet-mapping>
+    <servlet-name>UpdateCustomerDetail</servlet-name>
+    <url-pattern>/UpdateCustomerDetail</url-pattern>
+  </servlet-mapping>
 </web-app>

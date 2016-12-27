@@ -7,6 +7,7 @@ var inputValidBool=false;
 var firstNameToDB="";
 var lastNameToDB="";
 var genderToDB="Male";
+var dateOfBirthToDB="01/07/1998";
 var ageToDB="";
 var mobNumberToDB="";
 var altMobToDB="";
@@ -28,7 +29,9 @@ var monthArr = ["Jan","Feb","Mar","Apr","May","June","Jul","Aug","Sep","Oct","No
 var infoToUserEl = document.getElementById("infoToUserContainer");
 
 $(document).ready(function() {
-	
+	/**
+	 * Page initializing scripts - Start
+	 */
 	var copyAddEl = document.getElementById("copyAddress");
 	var btnOffset = $("#copyAddress").offset();
 
@@ -48,6 +51,10 @@ $(document).ready(function() {
 		$("#infoToUserContainer").css("display","none");
 	});
 	
+	$( ".makeReadOnly" ).removeAttr("readonly");
+	/**
+	 * Page initializing scripts - End
+	 */
 	if(getCookie("userName")!=null){	
 		if(window.location.href.indexOf('?lnumber')>-1){
 			var vars = [], hash;
@@ -107,6 +114,8 @@ function setFieldsForUserDetailUpdate(returnData){
 	document.getElementById("expireDate").value = returnData[16].trim();
 	document.getElementById("renewedDate").value = returnData[17].trim();
 	
+	$('.makeReadOnly').attr( 'readonly','readonly');
+	
 	document.getElementById("saveDetails").innerHTML = "Update";
 }
 
@@ -150,18 +159,10 @@ function copyPremAddressToTempAddress(){
 		document.getElementById("temporaryAddressPin").value = "";
 	}
 }
-
-/**
- * Listener for Save operation
- */
-function saveListener()
-{
-	validateInputs();
-}
 /**
  * Validate inputs from the user and provide appropriate error msg
  */
-function validateInputs()
+function saveListener()
 {
 	//validate customer name 
 	var customerName =	document.getElementById("firstName").value;
@@ -180,20 +181,36 @@ function validateInputs()
 	if(customerLastName){
 		lastNameToDB = customerLastName;
 	}
-
+	//validate date of birth
+	var dateOfBirth = document.getElementById("dateOfBirth").value;
+	if(dateOfBirth){
+		var customerDOB = new Date(dateOfBirth);
+		var cDate = new Date();
+		if(customerDOB.getTime() > cDate.getTime()){
+			displayErrorMessage("dateOfBirth",dOBLimitErrormsg);
+			document.getElementById("dateOfBirth").style.border = errorBorderHighlight;
+			return;
+		}else{
+			dateOfBirthToDB = dateOfBirth;
+			document.getElementById("age").value = cDate.getYear()-customerDOB.getYear();
+			document.getElementById("dateOfBirth").style.border = makeBorderNone;
+		}
+	}else{
+		displayErrorMessage("dateOfBirth",dateOfBirthErrormsg);
+		document.getElementById("dateOfBirth").style.border = errorBorderHighlight;
+		return;
+	}
 	//validate customer age
 	var customerAge =	document.getElementById("age").value;
 
 	if(customerAge)
 	{
 		if (parseInt(customerAge) < ageLimitMin){
-			//alert(ageLimitErrorMsg);
-			displayErrorMessage("age",ageLimitErrorMsg);
+			displayErrorMessage("dateOfBirth",ageLimitErrorMsg);
 			document.getElementById("age").style.border = errorBorderHighlight;
 			return;
 		}else if (parseInt(customerAge) > ageLimitMax){
-//			alert(ageLimitErrorMsg);
-			displayErrorMessage("age",ageLimitErrorMsgMax);
+			displayErrorMessage("dateOfBirth",ageLimitErrorMsgMax);
 			document.getElementById("age").style.border = errorBorderHighlight;
 			return;
 		}
@@ -203,8 +220,7 @@ function validateInputs()
 		}
 	}
 	else {
-//		alert(ageErrorMsg);
-		displayErrorMessage("age",ageErrorMsg);
+		displayErrorMessage("dateOfBirth",ageErrorMsg);
 		document.getElementById("age").style.border = errorBorderHighlight;
 		return;
 	}
@@ -350,11 +366,16 @@ function validateInputs()
 	if(guardianName){
 		guardianNameToDB = guardianName;
 	}
-	proceedToSave();
+	var btnEl = document.getElementById("saveDetails");
+	if(btnEl.innerHTML.toLowerCase()=="save"){
+		proceedToSave();
+	}else if(btnEl.innerHTML.toLowerCase()=="update"){
+		proceedToUpdate();
+	}
 }
 
 /**
- * 
+ * Call servlet to insert new customer
  */
 function proceedToSave()
 {
@@ -363,15 +384,38 @@ function proceedToSave()
 	var permanentAddressToDB = '{"permanentAddressLine1":"'+permanentAddressLine1ToDB+'","permanentAddressLine2":"'+permanentAddressLine2ToDB+'","permanentAddressPin":"'+permanentAddressPinToDB+'"}';
 	var temporaryAddressToDB = '{"temporaryAddressLine1":"'+temporaryAddressLine1ToDB+'","temporaryAddressLine2":"'+temporaryAddressLine2ToDB+'","temporaryAddressPin":"'+temporaryAddressPinToDB+'"}';
 	
-	var newCustomerDetails = '{"customerFirstName":"'+firstNameToDB+'","customerLastName":"'+lastNameToDB+'","guardianName":"'+guardianNameToDB+'","customerAge":"'+ageToDB+'","gender":"'+genderToDB+'","mobileNumber":"'+mobNumberToDB+'","altMobileNumber":"'+altMobToDB+'","licenseNumber":"'+licenseNumberToDB+'","licenseType":"'+licenseTypeToDB+'","permenantAddress":'+permanentAddressToDB+',"temporaryAddress":'+temporaryAddressToDB+',"licenseIssuedDate":"'+issuedDateToDB+'","licenseExpiryDate":"'+expireDateToDB+'","licensRenewedDate":"'+renewedDateToDB+'"}';
+	var newCustomerDetails = '{"customerFirstName":"'+firstNameToDB+'","customerLastName":"'+lastNameToDB+'","guardianName":"'+guardianNameToDB+'","customerAge":"'+dateOfBirthToDB+'","gender":"'+genderToDB+'","mobileNumber":"'+mobNumberToDB+'","altMobileNumber":"'+altMobToDB+'","licenseNumber":"'+licenseNumberToDB+'","licenseType":"'+licenseTypeToDB+'","permenantAddress":'+permanentAddressToDB+',"temporaryAddress":'+temporaryAddressToDB+',"licenseIssuedDate":"'+issuedDateToDB+'","licenseExpiryDate":"'+expireDateToDB+'","licensRenewedDate":"'+renewedDateToDB+'"}';
 	newCustomerDetails = encodeURIComponent(newCustomerDetails);
 	$.post('addNewCustomer?userData='+newCustomerDetails, function(returnData) {
 		//Assuming it is true
 		if(returnData){
-			alert("Congrats! Your customer is added success fully..");
+			alert("Congrats! Your customer details are saved successfully..");
 			setTimeout(resetInputs(),1000);
 		}else{
-			alert("User sign up failed :( due to connectivity issues..Please try again");
+			alert("User sign up failed due to connectivity issues..Please try again");
+		}
+	});
+}
+
+/**
+ * Call servlet to update existing customer details
+ */
+function proceedToUpdate()
+{
+	//call servlet to make entry into DB
+
+	var permanentAddressToDB = '{"permanentAddressLine1":"'+permanentAddressLine1ToDB+'","permanentAddressLine2":"'+permanentAddressLine2ToDB+'","permanentAddressPin":"'+permanentAddressPinToDB+'"}';
+	var temporaryAddressToDB = '{"temporaryAddressLine1":"'+temporaryAddressLine1ToDB+'","temporaryAddressLine2":"'+temporaryAddressLine2ToDB+'","temporaryAddressPin":"'+temporaryAddressPinToDB+'"}';
+	
+	var newCustomerDetails = '{"customerFirstName":"'+firstNameToDB+'","customerLastName":"'+lastNameToDB+'","guardianName":"'+guardianNameToDB+'","customerAge":"'+dateOfBirthToDB+'","gender":"'+genderToDB+'","mobileNumber":"'+mobNumberToDB+'","altMobileNumber":"'+altMobToDB+'","licenseNumber":"'+licenseNumberToDB+'","licenseType":"'+licenseTypeToDB+'","permenantAddress":'+permanentAddressToDB+',"temporaryAddress":'+temporaryAddressToDB+',"licenseIssuedDate":"'+issuedDateToDB+'","licenseExpiryDate":"'+expireDateToDB+'","licensRenewedDate":"'+renewedDateToDB+'"}';
+	newCustomerDetails = encodeURIComponent(newCustomerDetails);
+	$.put('UpdateCustomerDetail?userData='+newCustomerDetails, function(returnData) {
+		//Assuming it is true
+		if(returnData){
+			alert("Congrats! Your customer details are saved successfully..");
+			setTimeout(resetInputs(),1000);
+		}else{
+			alert("Update customer details failed due to connectivity issues..Please try again");
 		}
 	});
 }

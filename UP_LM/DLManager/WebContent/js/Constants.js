@@ -5,6 +5,8 @@ var appVersion = "v1.0.0"
  */
 var nameErrorMsg="Please enter customer name";
 var ageErrorMsg="Please enter customer's age";
+var dateOfBirthErrormsg = "Please select a valid date for DOB";
+var dOBLimitErrormsg = "DOB cannot be a future date";
 var ageLimitErrorMsg="Customer should be atleast 18 years old";
 var ageLimitErrorMsgMax="Customer is too old!";
 var mobErrorMsg="Mobile number field cannot be empty";
