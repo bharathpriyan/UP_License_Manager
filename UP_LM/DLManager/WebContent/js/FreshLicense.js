@@ -127,7 +127,7 @@ function setExpiryDate(){
 	var issuedDate = new Date(issuedDateVal);
 	var oldExpiryDate = new Date(expireDateToDB);
 	var expiryDate = new Date(issuedDateVal);
-	userUpdateBool = true;
+	//userUpdateBool = true;
 	if(userUpdateBool){
 		if(licenseTypeFromDB != licenseTypeToDB){
 			if((licenseTypeFromDB == "LMVH" || licenseTypeFromDB == "MCWG") && (licenseTypeFromDB == "Batch" && licenseTypeToDB == "HTV")){
