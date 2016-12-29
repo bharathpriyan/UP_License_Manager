@@ -1,30 +1,26 @@
 /**
  * Create new entry for user
- * Bharath
+ * 
  */
-var validationErrorMsg="";
-var inputValidBool=false;
-var firstNameToDB="";
-var lastNameToDB="";
-var genderToDB="Male";
-var dateOfBirthToDB="01/07/1998";
-var ageToDB="";
-var mobNumberToDB="";
-var altMobToDB="";
-var licenseNumberToDB="";
-var licenseTypeToDB="LMVH";
-var todayDateString = "";
-var expiryDateString = "";
-var permanentAddressLine1ToDB = "";
-var permanentAddressLine2ToDB = "";
-var permanentAddressPinToDB = "";
-var temporaryAddressLine1ToDB = "";
-var temporaryAddressLine2ToDB = "";
-var temporaryAddressPinToDB = "";
-var guardianNameToDB = "";
-var issuedDateToDB = "";
-var expireDateToDB = "";
-var renewedDateToDB = "";
+var userUpdateBool=false;
+var firstNameToDB="", firstNameFromDB="";
+var lastNameToDB="",lastNameFromDB="";
+var genderToDB="Male",genderFromDB="";
+var dateOfBirthToDB="01/07/1998",dateOfBirthFromDB="";
+var ageToDB="",ageFromDB="";
+var mobNumberToDB="",mobNumberFromDB="";
+var altMobToDB="",altMobFromDB="";
+var licenseNumberToDB="",licenseNumberFromDB="";
+var licenseTypeToDB="LMVH",licenseTypeFromDB="LMVH";
+var permanentAddressLine1ToDB = "",permanentAddressLine1FromDB="";
+var permanentAddressLine2ToDB = "",permanentAddressLine2FromDB = "";
+var permanentAddressPinToDB = "",permanentAddressPinFromDB = "";
+var temporaryAddressLine1ToDB = "",temporaryAddressLine1FromDB = "";
+var temporaryAddressLine2ToDB = "",temporaryAddressLine2FromDB = "";
+var temporaryAddressPinToDB = "",temporaryAddressPinFromDB = "";
+var guardianNameToDB = "",guardianNameFromDB = "";
+var issuedDateToDB = "",issuedDateFromDB = "";
+var expireDateToDB = "",expireDateFromDB = "";
 var monthArr = ["Jan","Feb","Mar","Apr","May","June","Jul","Aug","Sep","Oct","Nov","Dec"];
 var infoToUserEl = document.getElementById("infoToUserContainer");
 
@@ -72,6 +68,7 @@ $(document).ready(function() {
 					returnData = returnData.substring(1,returnData.length-1);
 					var returnArray = returnData.split(",");
 					setFieldsForUserDetailUpdate(returnArray);
+					userUpdateBool = true;
 				}else{
 					alert("Fetch user details failed due to connectivity issues..Please try again");
 				}
@@ -93,7 +90,7 @@ function setFieldsForUserDetailUpdate(returnData){
 	document.getElementById("lastName").value = (tLNmae==="null"?"":tLNmae);
 	var tFHName = returnData[2].trim();
 	document.getElementById("fatherHusbandName").value = (tFHName==="null"?"":tFHName);
-	document.getElementById("age").value = returnData[3].trim();
+	document.getElementById("dateOfBirth").value = returnData[3].trim();
 	document.getElementById("gender").value = returnData[4].trim()=='M'?"Male":"Female";
 	document.getElementById("mobNumber").value = returnData[5].trim();
 	var tAltMob = returnData[6].trim();
@@ -117,26 +114,50 @@ function setFieldsForUserDetailUpdate(returnData){
 	$('.makeReadOnly').attr( 'readonly','readonly');
 	
 	document.getElementById("saveDetails").innerHTML = "Update";
+	
+	licenseTypeFromDB=returnData[14].trim();
+
 }
 
 /**
  * Set date fields
  */
-function setInitialValues(){
-
-	var todaydate = new Date();
-	var expiryDate = new Date();
-	if(ageToDB<40){
-	expiryDate.setYear(todaydate.getYear()+10);
+function setExpiryDate(){
+	var issuedDateVal= document.getElementById("issuedDate").value;
+	var issuedDate = new Date(issuedDateVal);
+	var oldExpiryDate = new Date(expireDateToDB);
+	var expiryDate = new Date(issuedDateVal);
+	userUpdateBool = true;
+	if(userUpdateBool){
+		if(licenseTypeFromDB != licenseTypeToDB){
+			if((licenseTypeFromDB == "LMVH" || licenseTypeFromDB == "MCWG") && (licenseTypeFromDB == "Batch" && licenseTypeToDB == "HTV")){
+				expiryDate.setYear(issuedDate.getFullYear()+3);
+			}else if(licenseTypeFromDB == "HTV" && licenseTypeToDB == "HAZ"){
+				var tempDate = new Date(issuedDate);
+					tempDate.setMonth(issuedDate.getMonths()+10)
+				//if HTV's expiry is lesser than HAZ, HAZ will expire on HTV's expiry date
+				if(oldExpiryDate.getTime()>tempDate.getTime()){
+					expiryDate.setYear(issuedDate.getFullYear()+1);
+				}
+			}
+		}
 	}
-
-	todayDateString = todaydate.getDate() + "-" +monthArr[todaydate.getMonth()]+ "-"+todaydate.getFullYear();
-
-	document.getElementById("issuedDate").value = todayDateString;
-	document.getElementById("renewedDate").value = todayDateString;
-
-	expiryDateString = todaydate.getDate() + "-" +monthArr[todaydate.getMonth()]+ "-"+(todaydate.getFullYear()+licenseExpiryPeriodInYears);
-	document.getElementById("expireDate").value = expiryDateString;
+	else{
+		if(licenseTypeToDB == "LMVH" || licenseTypeToDB == "MCWG"){
+			if(ageToDB<=40){
+				expiryDate.setYear(issuedDate.getFullYear()+(40-ageToDB));
+			}else if(ageToDB>40 && ageToDB<=50){
+				expiryDate.setYear(issuedDate.getFullYear()+10);
+			}else if(ageToDB>50){
+				expiryDate.setYear(issuedDate.getFullYear()+5);
+			}
+		}else if(licenseTypeToDB == "HAZ"){
+			expiryDate.setYear(issuedDate.getFullYear()+1);
+		}else{
+			expiryDate.setYear(issuedDate.getFullYear()+3);
+		}
+	}
+	document.getElementById("expireDate").value = expiryDate.getFullYear()+"-"+(expiryDate.getMonth()+1)+"-"+expiryDate.getDate();
 }
 
 /**
@@ -192,7 +213,7 @@ function saveListener()
 			return;
 		}else{
 			dateOfBirthToDB = dateOfBirth;
-			document.getElementById("age").value = cDate.getYear()-customerDOB.getYear();
+			document.getElementById("age").value = cDate.getFullYear()-customerDOB.getFullYear();
 			document.getElementById("dateOfBirth").style.border = makeBorderNone;
 		}
 	}else{
@@ -336,18 +357,6 @@ function saveListener()
 		document.getElementById("expireDate").style.border = errorBorderHighlight;
 		return;
 	}
-	var renewedDate = document.getElementById("renewedDate").value;
-	if(renewedDate)
-	{
-		renewedDateToDB=renewedDate;
-		document.getElementById("renewedDate").style.border = makeBorderNone;
-	}
-	else
-	{
-		displayErrorMessage("renewedDate",renewedDateErrorMsg);
-		document.getElementById("renewedDate").style.border = errorBorderHighlight;
-		return;
-	}
 
 	var temporaryAddressLine1 =	document.getElementById("temporaryAddressLine1").value;
 	var temporaryAddressLine2 =	document.getElementById("temporaryAddressLine2").value;
@@ -384,7 +393,7 @@ function proceedToSave()
 	var permanentAddressToDB = '{"permanentAddressLine1":"'+permanentAddressLine1ToDB+'","permanentAddressLine2":"'+permanentAddressLine2ToDB+'","permanentAddressPin":"'+permanentAddressPinToDB+'"}';
 	var temporaryAddressToDB = '{"temporaryAddressLine1":"'+temporaryAddressLine1ToDB+'","temporaryAddressLine2":"'+temporaryAddressLine2ToDB+'","temporaryAddressPin":"'+temporaryAddressPinToDB+'"}';
 	
-	var newCustomerDetails = '{"customerFirstName":"'+firstNameToDB+'","customerLastName":"'+lastNameToDB+'","guardianName":"'+guardianNameToDB+'","customerAge":"'+dateOfBirthToDB+'","gender":"'+genderToDB+'","mobileNumber":"'+mobNumberToDB+'","altMobileNumber":"'+altMobToDB+'","licenseNumber":"'+licenseNumberToDB+'","licenseType":"'+licenseTypeToDB+'","permenantAddress":'+permanentAddressToDB+',"temporaryAddress":'+temporaryAddressToDB+',"licenseIssuedDate":"'+issuedDateToDB+'","licenseExpiryDate":"'+expireDateToDB+'","licensRenewedDate":"'+renewedDateToDB+'"}';
+	var newCustomerDetails = '{"customerFirstName":"'+firstNameToDB+'","customerLastName":"'+lastNameToDB+'","guardianName":"'+guardianNameToDB+'","customerAge":"'+dateOfBirthToDB+'","gender":"'+genderToDB+'","mobileNumber":"'+mobNumberToDB+'","altMobileNumber":"'+altMobToDB+'","licenseNumber":"'+licenseNumberToDB+'","licenseType":"'+licenseTypeToDB+'","permenantAddress":'+permanentAddressToDB+',"temporaryAddress":'+temporaryAddressToDB+',"licenseIssuedDate":"'+issuedDateToDB+'","licenseExpiryDate":"'+expireDateToDB+'","licensRenewedDate":""}';
 	newCustomerDetails = encodeURIComponent(newCustomerDetails);
 	$.post('addNewCustomer?userData='+newCustomerDetails, function(returnData) {
 		//Assuming it is true
@@ -407,7 +416,7 @@ function proceedToUpdate()
 	var permanentAddressToDB = '{"permanentAddressLine1":"'+permanentAddressLine1ToDB+'","permanentAddressLine2":"'+permanentAddressLine2ToDB+'","permanentAddressPin":"'+permanentAddressPinToDB+'"}';
 	var temporaryAddressToDB = '{"temporaryAddressLine1":"'+temporaryAddressLine1ToDB+'","temporaryAddressLine2":"'+temporaryAddressLine2ToDB+'","temporaryAddressPin":"'+temporaryAddressPinToDB+'"}';
 	
-	var newCustomerDetails = '{"customerFirstName":"'+firstNameToDB+'","customerLastName":"'+lastNameToDB+'","guardianName":"'+guardianNameToDB+'","customerAge":"'+dateOfBirthToDB+'","gender":"'+genderToDB+'","mobileNumber":"'+mobNumberToDB+'","altMobileNumber":"'+altMobToDB+'","licenseNumber":"'+licenseNumberToDB+'","licenseType":"'+licenseTypeToDB+'","permenantAddress":'+permanentAddressToDB+',"temporaryAddress":'+temporaryAddressToDB+',"licenseIssuedDate":"'+issuedDateToDB+'","licenseExpiryDate":"'+expireDateToDB+'","licensRenewedDate":"'+renewedDateToDB+'"}';
+	var newCustomerDetails = '{"customerFirstName":"'+firstNameToDB+'","customerLastName":"'+lastNameToDB+'","guardianName":"'+guardianNameToDB+'","customerAge":"'+dateOfBirthToDB+'","gender":"'+genderToDB+'","mobileNumber":"'+mobNumberToDB+'","altMobileNumber":"'+altMobToDB+'","licenseNumber":"'+licenseNumberToDB+'","licenseType":"'+licenseTypeToDB+'","permenantAddress":'+permanentAddressToDB+',"temporaryAddress":'+temporaryAddressToDB+',"licenseIssuedDate":"'+issuedDateToDB+'","licenseExpiryDate":"'+expireDateToDB+'","licensRenewedDate":""}';
 	newCustomerDetails = encodeURIComponent(newCustomerDetails);
 	$.put('UpdateCustomerDetail?userData='+newCustomerDetails, function(returnData) {
 		//Assuming it is true
@@ -452,6 +461,7 @@ function resetInputs(){
 	$(".tAddress").val("");
 	document.getElementById("licenseNumber").value = "";
 	document.getElementById("licenseType").value = "LMVH";
+	document.getElementById("dateOfBirth").value = "1998-01-07";
 
 }
 /**

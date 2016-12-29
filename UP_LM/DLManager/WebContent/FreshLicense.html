@@ -42,13 +42,12 @@
 <td><select id="licenseType" class="makeReadOnly" onchange="captureLicenseType();">
 <option selected="selected" value="LMVH">LMVH</option>
 <option value="MCWG">MCWG</option>
-<option value="Badge">Badge</option>
+<option value="Badge">Batch</option>
 <option value="HTV">HTV</option>
 <option value="HAZ">HAZ</option>
 </select></td></tr>
-<tr><td  class="userFieldLable">Issued Date&nbsp;:&nbsp;</td><td><input type="date" id="issuedDate" class="userInputClass makeReadOnly" maxlength="11" /></td></tr>
-<tr><td class="userFieldLable">Expire Date&nbsp;:&nbsp;</td><td><input type="date" id="expireDate" class="userInputClass" maxlength="11"/></td></tr>
-<tr><td class="userFieldLable">Renewed Date&nbsp;:&nbsp;</td><td><input type="date" id="renewedDate" class="userInputClass" maxlength="11"/></td></tr>	
+<tr><td  class="userFieldLable">Issued Date&nbsp;:&nbsp;</td><td><input type="date" id="issuedDate" class="userInputClass makeReadOnly" maxlength="11" onchange="setExpiryDate()"/></td></tr>
+<tr><td class="userFieldLable">Expire Date&nbsp;:&nbsp;</td><td><input type="date" id="expireDate" class="userInputClass" maxlength="11" readonly="readonly"/></td></tr>
 </table>
 </div>
 <div id="saveButtonContainer">
