@@ -157,7 +157,15 @@ function setExpiryDate(){
 			expiryDate.setYear(issuedDate.getFullYear()+3);
 		}
 	}
-	document.getElementById("expireDate").value = expiryDate.getFullYear()+"-"+(expiryDate.getMonth()+1)+"-"+expiryDate.getDate();
+	var monthVal = expiryDate.getMonth()+1;
+	if(monthVal.toString().length==1){
+		monthVal ="0".concat(monthVal.toString());
+	}
+	var dateVal = expiryDate.getDate();
+	if(dateVal.toString().length==1){
+		dateVal ="0".concat(dateVal.toString());
+	}
+	document.getElementById("expireDate").value = expiryDate.getFullYear()+"-"+monthVal+"-"+dateVal;
 }
 
 /**
