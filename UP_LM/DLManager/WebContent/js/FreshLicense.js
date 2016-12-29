@@ -221,7 +221,6 @@ function saveListener()
 			return;
 		}else{
 			dateOfBirthToDB = dateOfBirth;
-			document.getElementById("age").value = cDate.getFullYear()-customerDOB.getFullYear();
 			document.getElementById("dateOfBirth").style.border = makeBorderNone;
 		}
 	}else{
@@ -483,4 +482,12 @@ function displayErrorMessage(elementName,msgToUser){
 	$("#infoToUserContainer").css("top",btnOffset.top-5);
 	$("#infoToUserContainer").css("left",btnOffset.left+460);
 	$("#infoToUserContainer").css("display","block");
+}
+
+function updateAge(){
+	var dateOfBirth = document.getElementById("dateOfBirth").value;
+	var customerDOB = new Date(dateOfBirth);
+	var cDate = new Date();
+	
+	document.getElementById("age").value = cDate.getFullYear()-customerDOB.getFullYear();
 }
