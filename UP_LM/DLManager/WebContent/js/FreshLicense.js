@@ -46,7 +46,7 @@ $(document).ready(function() {
 	$( ".userInputClass" ).keyup(function() {
 		$("#infoToUserContainer").css("display","none");
 	});
-	
+
 	$( ".makeReadOnly" ).removeAttr("readonly");
 	/**
 	 * Page initializing scripts - End
@@ -61,7 +61,6 @@ $(document).ready(function() {
 				vars[hash[0]] = hash[1];
 			}
 			var lisenceNumber = vars["lnumber"];
-//			parent.selectFreshLisenceTab();
 			$.get('FetchUserDetails?lNumber='+lisenceNumber, function(returnData) {
 				//Assuming it is true
 				if(returnData){
@@ -72,6 +71,7 @@ $(document).ready(function() {
 				}else{
 					alert("Fetch user details failed due to connectivity issues..Please try again");
 				}
+				parent.selectFreshLisenceTab();
 			});
 		}else{
 			//setInitialValues();
@@ -84,7 +84,7 @@ $(document).ready(function() {
 });
 
 function setFieldsForUserDetailUpdate(returnData){
-	
+
 	document.getElementById("firstName").value = returnData[0].trim();
 	var tLNmae = returnData[1].trim();
 	document.getElementById("lastName").value = (tLNmae==="null"?"":tLNmae);
@@ -109,15 +109,14 @@ function setFieldsForUserDetailUpdate(returnData){
 	document.getElementById("temporaryAddressPin").value = (tPin==="null"?"":tPin);
 	document.getElementById("issuedDate").value = returnData[14].trim();
 	document.getElementById("expireDate").value = returnData[15].trim();
-	var trenewDate = returnData[16].trim();
-//	document.getElementById("renewedDate").value = (trenewDate==null?"":trenewDate);
-	
+
 	$('.makeReadOnly').attr( 'readonly','readonly');
-	
+
 	document.getElementById("saveDetails").innerHTML = "Update";
-	
+
 	licenseTypeFromDB=returnData[13].trim();
-	
+	expireDateFromDB=returnData[15].trim();
+
 	updateAge();
 
 }
@@ -128,21 +127,25 @@ function setFieldsForUserDetailUpdate(returnData){
 function setExpiryDate(){
 	var issuedDateVal= document.getElementById("issuedDate").value;
 	var issuedDate = new Date(issuedDateVal);
-	var oldExpiryDate = new Date(expireDateToDB);
+	var oldExpiryDate = new Date(expireDateFromDB);
 	var expiryDate = new Date(issuedDateVal);
 
 	if(userUpdateBool){
-		if(licenseTypeFromDB != licenseTypeToDB){
-			if((licenseTypeFromDB == "LMVH" || licenseTypeFromDB == "MCWG") && (licenseTypeFromDB == "Batch" && licenseTypeToDB == "HTV")){
-				expiryDate.setYear(issuedDate.getFullYear()+3);
-			}else if(licenseTypeFromDB == "HTV" && licenseTypeToDB == "HAZ"){
-				var tempDate = new Date(issuedDate);
-					tempDate.setMonth(issuedDate.getMonths()+10)
-				//if HTV's expiry is lesser than HAZ, HAZ will expire on HTV's expiry date
-				if(oldExpiryDate.getTime()>tempDate.getTime()){
-					expiryDate.setYear(issuedDate.getFullYear()+1);
-				}
+		if((licenseTypeFromDB == "Batch" && licenseTypeToDB == "HTV") || (licenseTypeFromDB == "HTV" && licenseTypeToDB == "HTV")){
+			expiryDate.setYear(issuedDate.getFullYear()+3);
+		}else if(licenseTypeFromDB == "HTV" && licenseTypeToDB == "HAZ"){
+			var tempDate = new Date(issuedDate);
+			tempDate.setMonth(issuedDate.getMonth()+10)
+			//if HTV's expiry is lesser than HAZ, HAZ will expire on HTV's expiry date
+			if(oldExpiryDate.getTime()>tempDate.getTime()){
+				expiryDate.setYear(issuedDate.getFullYear()+1);
+			}else{
+				expiryDate=oldExpiryDate;
 			}
+		}else if(licenseTypeFromDB != "HTV" && licenseTypeToDB == "HAZ"){
+			expiryDate.setYear(issuedDate.getFullYear()+1);
+		}else{
+			expiryDate.setYear(issuedDate.getFullYear()+3);
 		}
 	}
 	else{
@@ -300,7 +303,7 @@ function saveListener()
 			return;
 		}
 	}
-	
+
 	var permanentAddressLine1 =	document.getElementById("permanentAddressLine1").value;
 	var permanentAddressLine2 =	document.getElementById("permanentAddressLine2").value;
 	var permanentAddressPin =	document.getElementById("permanentAddressPin").value;
@@ -380,7 +383,7 @@ function saveListener()
 	if(temporaryAddressPin){
 		temporaryAddressPinToDB = temporaryAddressPin;
 	}
-	
+
 	var guardianName = document.getElementById("fatherHusbandName").value;
 	if(guardianName){
 		guardianNameToDB = guardianName;
@@ -402,7 +405,7 @@ function proceedToSave()
 
 	var permanentAddressToDB = '{"permanentAddressLine1":"'+permanentAddressLine1ToDB+'","permanentAddressLine2":"'+permanentAddressLine2ToDB+'","permanentAddressPin":"'+permanentAddressPinToDB+'"}';
 	var temporaryAddressToDB = '{"temporaryAddressLine1":"'+temporaryAddressLine1ToDB+'","temporaryAddressLine2":"'+temporaryAddressLine2ToDB+'","temporaryAddressPin":"'+temporaryAddressPinToDB+'"}';
-	
+
 	var newCustomerDetails = '{"customerFirstName":"'+firstNameToDB+'","customerLastName":"'+lastNameToDB+'","guardianName":"'+guardianNameToDB+'","customerAge":"'+dateOfBirthToDB+'","gender":"'+genderToDB+'","mobileNumber":"'+mobNumberToDB+'","altMobileNumber":"'+altMobToDB+'","licenseNumber":"'+licenseNumberToDB+'","licenseType":"'+licenseTypeToDB+'","permenantAddress":'+permanentAddressToDB+',"temporaryAddress":'+temporaryAddressToDB+',"licenseIssuedDate":"'+issuedDateToDB+'","licenseExpiryDate":"'+expireDateToDB+'","licensRenewedDate":""}';
 	newCustomerDetails = encodeURIComponent(newCustomerDetails);
 	$.post('addNewCustomer?userData='+newCustomerDetails, function(returnData) {
@@ -425,14 +428,14 @@ function proceedToUpdate()
 
 	var permanentAddressToDB = '{"permanentAddressLine1":"'+permanentAddressLine1ToDB+'","permanentAddressLine2":"'+permanentAddressLine2ToDB+'","permanentAddressPin":"'+permanentAddressPinToDB+'"}';
 	var temporaryAddressToDB = '{"temporaryAddressLine1":"'+temporaryAddressLine1ToDB+'","temporaryAddressLine2":"'+temporaryAddressLine2ToDB+'","temporaryAddressPin":"'+temporaryAddressPinToDB+'"}';
-	
+
 	var newCustomerDetails = '{"customerFirstName":"'+firstNameToDB+'","customerLastName":"'+lastNameToDB+'","guardianName":"'+guardianNameToDB+'","customerAge":"'+dateOfBirthToDB+'","gender":"'+genderToDB+'","mobileNumber":"'+mobNumberToDB+'","altMobileNumber":"'+altMobToDB+'","licenseNumber":"'+licenseNumberToDB+'","licenseType":"'+licenseTypeToDB+'","permenantAddress":'+permanentAddressToDB+',"temporaryAddress":'+temporaryAddressToDB+',"licenseIssuedDate":"'+issuedDateToDB+'","licenseExpiryDate":"'+expireDateToDB+'","licensRenewedDate":""}';
 	newCustomerDetails = encodeURIComponent(newCustomerDetails);
 	$.post('UpdateCustomerDetail?userData='+newCustomerDetails, function(returnData) {
 		//Assuming it is true
 		if(returnData){
 			alert("Congrats! Your customer details are saved successfully..");
-			setTimeout(resetInputs(),1000);
+			setTimeout(showSearchUserScreen(),5000);
 		}else{
 			alert("Update customer details failed due to connectivity issues..Please try again");
 		}
@@ -491,6 +494,6 @@ function updateAge(){
 	var dateOfBirth = document.getElementById("dateOfBirth").value;
 	var customerDOB = new Date(dateOfBirth);
 	var cDate = new Date();
-	
+
 	document.getElementById("age").value = cDate.getFullYear()-customerDOB.getFullYear();
 }

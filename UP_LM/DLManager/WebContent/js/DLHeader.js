@@ -58,3 +58,8 @@ function logoutListener(){
 		setTimeout(logoutListener,5000);
 	}
 }
+function selectFreshLisenceTab(){
+	$("#searchUserTab").removeClass("tabsClassSelected");
+	$("#reportsTab").removeClass("tabsClassSelected");
+	$("#freshTab").addClass("tabsClassSelected");
+}
