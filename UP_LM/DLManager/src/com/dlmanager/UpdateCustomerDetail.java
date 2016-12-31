@@ -18,7 +18,7 @@ public class UpdateCustomerDetail extends HttpServlet{
 
 	}
 
-	public void doPut(HttpServletRequest request, HttpServletResponse response)
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws javax.servlet.ServletException, java.io.IOException {
 		try {
 			String userData = URLDecoder.decode(request.getParameter("userData"),"UTF-8");
@@ -73,15 +73,15 @@ public class UpdateCustomerDetail extends HttpServlet{
 			}
 
 			Admin a = (Admin) request.getSession().getAttribute("validAdmin");
-//			if(a.addCustomer(customerFirstName, customerLastName, guardianName, customerAge, gender, mobileNumber, 
-//					altMobileNumber, licenseNumber, licenseType, licenseIssuedDate, licenseExpiryDate, 
-//					licensRenewedDate, permanentAddressLine1, permanentAddressLine2,
-//					permanentAddressPin, temporaryAddressLine1, temporaryAddressLine2, temporaryAddressPin)){
-//			
-//				response.setContentType("text/plain");
-//				response.setCharacterEncoding("UTF-8");
-//				response.getWriter().write("true"); //send success or failure as true or false (string)
-//			}
+			if(a.updateCustomer(customerFirstName, customerLastName, guardianName,customerAge, gender, mobileNumber, 
+					altMobileNumber,licenseNumber, 
+					licenseType, licenseIssuedDate, licenseExpiryDate, licensRenewedDate, permanentAddressLine1, permanentAddressLine2,
+					permanentAddressPin, temporaryAddressLine1, temporaryAddressLine2, temporaryAddressPin)){
+			
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write("true"); //send success or failure as true or false (string)
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

@@ -19,15 +19,17 @@ public class FetchAllReports extends HttpServlet{
 	        	String days = request.getParameter("days");
 	        	Admin a=(Admin) request.getSession().getAttribute("validAdmin");
 	        	String[][] custStr = a.retrieveCustomers(days);
-	        	JSONArray custArray = new JSONArray();
-	        	for(String[] s:custStr){
-	        		JSONObject o = new JSONObject();
-	        		for(int i=0;i<s.length;i++)
-	        			o.put("arg"+i, s[i]);
-	        		custArray.put(o);
+	        	if(custStr!=null){
+		        	JSONArray custArray = new JSONArray();
+		        	for(String[] s:custStr){
+		        		JSONObject o = new JSONObject();
+		        		for(int i=0;i<s.length;i++)
+		        			o.put("arg"+i, s[i]);
+		        		custArray.put(o);
+		        	}
+		        	response.setContentType("application/json");
+			        response.getWriter().print(custArray);
 	        	}
-	        	response.setContentType("application/json");
-		        response.getWriter().print(custArray);
 	        	//send result array here
 	        	/*
 	        	 * end - return data to javascript

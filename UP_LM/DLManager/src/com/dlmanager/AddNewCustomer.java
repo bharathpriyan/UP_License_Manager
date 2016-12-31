@@ -73,9 +73,9 @@ public class AddNewCustomer extends HttpServlet{
 			}
 
 			Admin a = (Admin) request.getSession().getAttribute("validAdmin");
-			if(a.addCustomer(customerFirstName, customerLastName, guardianName, customerAge, gender, mobileNumber, 
-					altMobileNumber, licenseNumber, licenseType, licenseIssuedDate, licenseExpiryDate, 
-					licensRenewedDate, permanentAddressLine1, permanentAddressLine2,
+			if(a.addCustomer(customerFirstName, customerLastName, guardianName,customerAge, gender, mobileNumber, 
+					altMobileNumber,licenseNumber, 
+					licenseType, licenseIssuedDate, licenseExpiryDate, licensRenewedDate, permanentAddressLine1, permanentAddressLine2,
 					permanentAddressPin, temporaryAddressLine1, temporaryAddressLine2, temporaryAddressPin)){
 			
 				response.setContentType("text/plain");

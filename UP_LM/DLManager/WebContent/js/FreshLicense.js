@@ -90,32 +90,35 @@ function setFieldsForUserDetailUpdate(returnData){
 	document.getElementById("lastName").value = (tLNmae==="null"?"":tLNmae);
 	var tFHName = returnData[2].trim();
 	document.getElementById("fatherHusbandName").value = (tFHName==="null"?"":tFHName);
-	document.getElementById("dateOfBirth").value = returnData[3].trim();
-	document.getElementById("gender").value = returnData[4].trim()=='M'?"Male":"Female";
-	document.getElementById("mobNumber").value = returnData[5].trim();
-	var tAltMob = returnData[6].trim();
+	document.getElementById("dateOfBirth").value = returnData[17].trim();
+	document.getElementById("gender").value = returnData[3].trim()=='M'?"Male":"Female";
+	document.getElementById("mobNumber").value = returnData[4].trim();
+	var tAltMob = returnData[5].trim();
 	document.getElementById("alternateMobNumber").value = (tAltMob==="null"?"":tAltMob);
-	document.getElementById("licenseNumber").value = returnData[13].trim();
-	document.getElementById("licenseType").value = returnData[14].trim();
-	document.getElementById("permanentAddressLine1").value = returnData[7].trim();
-	var tPAdd2 = returnData[8].trim();
+	document.getElementById("licenseNumber").value = returnData[12].trim();
+	document.getElementById("licenseType").value = returnData[13].trim();
+	document.getElementById("permanentAddressLine1").value = returnData[6].trim();
+	var tPAdd2 = returnData[7].trim();
 	document.getElementById("permanentAddressLine2").value = (tPAdd2==="null"?"":tPAdd2);
-	document.getElementById("permanentAddressPin").value = returnData[9].trim();
-	var ttadd1 = returnData[10].trim();
-	var ttadd2 = returnData[11].trim();
-	var tPin = returnData[12].trim();
+	document.getElementById("permanentAddressPin").value = returnData[8].trim();
+	var ttadd1 = returnData[9].trim();
+	var ttadd2 = returnData[10].trim();
+	var tPin = returnData[11].trim();
 	document.getElementById("temporaryAddressLine1").value = (ttadd1==="null"?"":ttadd1);
 	document.getElementById("temporaryAddressLine2").value = (ttadd2==="null"?"":ttadd2);
 	document.getElementById("temporaryAddressPin").value = (tPin==="null"?"":tPin);
-	document.getElementById("issuedDate").value = returnData[15].trim();
-	document.getElementById("expireDate").value = returnData[16].trim();
-	document.getElementById("renewedDate").value = returnData[17].trim();
+	document.getElementById("issuedDate").value = returnData[14].trim();
+	document.getElementById("expireDate").value = returnData[15].trim();
+	var trenewDate = returnData[16].trim();
+//	document.getElementById("renewedDate").value = (trenewDate==null?"":trenewDate);
 	
 	$('.makeReadOnly').attr( 'readonly','readonly');
 	
 	document.getElementById("saveDetails").innerHTML = "Update";
 	
-	licenseTypeFromDB=returnData[14].trim();
+	licenseTypeFromDB=returnData[13].trim();
+	
+	updateAge();
 
 }
 
@@ -127,7 +130,7 @@ function setExpiryDate(){
 	var issuedDate = new Date(issuedDateVal);
 	var oldExpiryDate = new Date(expireDateToDB);
 	var expiryDate = new Date(issuedDateVal);
-	//userUpdateBool = true;
+
 	if(userUpdateBool){
 		if(licenseTypeFromDB != licenseTypeToDB){
 			if((licenseTypeFromDB == "LMVH" || licenseTypeFromDB == "MCWG") && (licenseTypeFromDB == "Batch" && licenseTypeToDB == "HTV")){
@@ -425,7 +428,7 @@ function proceedToUpdate()
 	
 	var newCustomerDetails = '{"customerFirstName":"'+firstNameToDB+'","customerLastName":"'+lastNameToDB+'","guardianName":"'+guardianNameToDB+'","customerAge":"'+dateOfBirthToDB+'","gender":"'+genderToDB+'","mobileNumber":"'+mobNumberToDB+'","altMobileNumber":"'+altMobToDB+'","licenseNumber":"'+licenseNumberToDB+'","licenseType":"'+licenseTypeToDB+'","permenantAddress":'+permanentAddressToDB+',"temporaryAddress":'+temporaryAddressToDB+',"licenseIssuedDate":"'+issuedDateToDB+'","licenseExpiryDate":"'+expireDateToDB+'","licensRenewedDate":""}';
 	newCustomerDetails = encodeURIComponent(newCustomerDetails);
-	$.put('UpdateCustomerDetail?userData='+newCustomerDetails, function(returnData) {
+	$.post('UpdateCustomerDetail?userData='+newCustomerDetails, function(returnData) {
 		//Assuming it is true
 		if(returnData){
 			alert("Congrats! Your customer details are saved successfully..");
