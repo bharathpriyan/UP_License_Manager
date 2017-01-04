@@ -13,12 +13,14 @@ $(document).ready(function() {
  * Servlet call to validate login credentials
  */
 function validateLogin(){
-
 	var username = document.getElementById("login-name");
 	var password = document.getElementById("login-pass");
 
 	//$('<form action="Login"><input type="hidden" name="username" value="'+username.value+'"><input type="hidden" name="password" value="'+password+'"></form>').appendTo('body').submit();
 
+	setTimeout(webServiceCall(username,password),500);
+}
+function webServiceCall(username,password){
 	$.post('Login?uName='+username.value+'&pWord='+password.value, function(returnData) {
 		//Assuming it is true
 		if(returnData=="true"){
@@ -31,7 +33,6 @@ function validateLogin(){
 		}
 	});
 }
-
 function proceedToApplicationFeatures(){
 	window.location = "DLHeader.html";
 }
