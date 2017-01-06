@@ -2,6 +2,7 @@ var frameEl = document.getElementById("contentHolder");
 var logoutTimer = null;
 
 $(document).ready(function() {
+	$("#settingsWrapper").css("display","none");
 	document.getElementById("appVersionSpan").innerHTML = appVersion;
 	if(getCookie("userName")!=null){
 		frameEl.src = "FreshLicense.html";
@@ -15,12 +16,20 @@ $(document).ready(function() {
 	else{
 		proceedToLogout();
 	}
-
+	$("#settingsIcon").click(function(){
+		$("#settingsWrapper").css("display","block");
+	});
 });
 
-$('html').click(function(e) {                
+$('html').click(function(event) {                
 	clearTimeout(logoutTimer);
 	logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
+	
+	if(! (event.target.className.indexOf("menuList") > -1)
+			&& ! (event.target.className.indexOf("square") > -1)
+			&& ! (event.target.id.indexOf("settingsIcon") > -1)){
+		$("#settingsWrapper").css("display","none");
+	}
 });
 
 function showFreshLicenseForm(){
@@ -62,4 +71,12 @@ function selectFreshLisenceTab(){
 	$("#searchUserTab").removeClass("tabsClassSelected");
 	$("#reportsTab").removeClass("tabsClassSelected");
 	$("#freshTab").addClass("tabsClassSelected");
+}
+
+function showSettingsPopup(){
+	$('#settingsWrapper').slideToggle(800);
+}
+
+function closeSettingsPopup(){
+	$('#settingsWrapper').slideUp(800);
 }
