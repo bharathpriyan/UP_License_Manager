@@ -2,7 +2,7 @@
  * Create new entry for user
  * 
  */
-var userUpdateBool=false;
+var userUpdateBool=true;
 var firstNameToDB="", firstNameFromDB="";
 var lastNameToDB="",lastNameFromDB="";
 var genderToDB="Male",genderFromDB="";
@@ -496,4 +496,16 @@ function updateAge(){
 	var cDate = new Date();
 
 	document.getElementById("age").value = cDate.getFullYear()-customerDOB.getFullYear();
+}
+
+function validateLicenseNumber(){
+	if(userUpdateBool){
+		var licenseNumber = document.getElementById("licenseNumber").value;
+		$.get('CheckAvailability?lNumber='+licenseNumber, function(returnData) {
+			//True if already available
+			if(returnData){
+				alert("License number is already available in our records!");
+			}
+		});
+	}
 }

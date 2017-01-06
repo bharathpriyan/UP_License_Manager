@@ -4,7 +4,7 @@ var appVersion = "v1.0.0"
  * fresh License screen constants
  */
 var nameErrorMsg="Please enter customer name";
-var ageErrorMsg="Please enter customer's age";
+var ageErrorMsg="Please enter DOB & Age";
 var dateOfBirthErrormsg = "Please select a valid date for DOB";
 var dOBLimitErrormsg = "DOB cannot be a future date";
 var ageLimitErrorMsg="Customer should be atleast 18 years old";
@@ -84,7 +84,6 @@ function deleteAllCookies() {
 			name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
 			deleteCookie(name);
 		}
-
 	}
 	else
 	{
