@@ -7,6 +7,7 @@ $(document).ready(function() {
 	}
 });
 
+var exDate = "";
 
 function populatetable(returnData){
 	
@@ -53,9 +54,9 @@ function fetchReports(){
 function setExpiryDate(returnData){
 	var expiryDate = new Date();
 	var ageFromDB = 18;
-	var custDOB = new Date(returnData[3].trim());
+	var custDOB = new Date(returnData[17].trim());
 	ageFromDB = expiryDate.getFullYear() - custDOB.getFullYear();
-	var licenseTypeFromDB = returnData[14].trim();
+	var licenseTypeFromDB = returnData[13].trim();
 		if(licenseTypeFromDB == "LMVH" || licenseTypeFromDB == "MCWG"){
 			if(ageFromDB<=40){
 				expiryDate.setYear(expiryDate.getFullYear()+(40-ageFromDB));
@@ -70,16 +71,18 @@ function setExpiryDate(returnData){
 			expiryDate.setYear(expiryDate.getFullYear()+3);
 		}
 
-	return expiryDate.getFullYear()+"-"+(expiryDate.getMonth()+1)+"-"+expiryDate.getDate();
+	exDate = expiryDate.getFullYear()+"-"+(expiryDate.getMonth()+1)+"-"+expiryDate.getDate();
 }
 
 function fetchDetailsByLNumber(lisenceNumber){
 	$.get('FetchUserDetails?lNumber='+lisenceNumber, function(returnData) {
 		//Assuming it is true
-		if(returnData){
+		if(returnData!=null){
+			alert('Pogala')
 			returnData = returnData.substring(1,returnData.length-1);
 			var returnArray = returnData.split(",");
-			return setExpiryDate(returnArray);
+			setExpiryDate(returnArray);
+			alert(exDate);
 		}else{
 			alert("Renewal failed due to connectivity issues..Please try again");
 		}
@@ -87,7 +90,7 @@ function fetchDetailsByLNumber(lisenceNumber){
 }
 
 function renewSelectedUsers(){
-	var fields = $("input[type='checkbox']:checked").serializeArray(); 
+	var fields = $("input[class='userCheckBoxClass']:checked"); 
     if (fields.length == 0) 
     { 
         alert('Please select atleast one user for renewal'); 
@@ -95,15 +98,46 @@ function renewSelectedUsers(){
     else 
     { 
         for (var int = 0; int < fields.length; int++) {
-        	var newExpiryDate = fetchDetailsByLNumber(fields[int].id);
-        	$.put('RenewUser?licenseNumber='+fields[int].id+'&expiryDate='+newExpiryDate, function(returnData) {
-        		//Assuming it is true
+        	var lNumber = fields[int].id;
+        	$.post('RenewUser?licenseNumber='+fields[int].id, function(returnData) {
         		if(returnData){
-        			alert("Renewal success for customer :"+lisenceNumber);
+        			alert("Renewal success for customer :"+lNumber);
         		}else{
-        			alert("Renewal failed for customer :"+lisenceNumber);
+        			alert("Renewal failed for customer :"+lNumber);
         		}
         	});
+        	
+//        	$.when(fetchDetailsByLNumber(fields[int].id)).then(webServiceCallForRenewal(fields[int].id,exDate));
+        	/*if(fetchDetailsByLNumber(fields[int].id)=="true"){
+        	alert("back");
+        	if(exDate && fields[int].id){
+        		webServiceCallForRenewal(fields[int].id,newExpiryDate);
+        	}
+        	}*/
 		} 
     }
+}
+
+function webServiceCallForRenewal(lNumber){
+	$.post('RenewUser?licenseNumber='+lNumber, function(returnData) {
+		alert(lNumber)
+		//Assuming it is true
+		if(returnData){
+			alert("Renewal success for customer :"+lisenceNumber);
+		}else{
+			alert("Renewal failed for customer :"+lisenceNumber);
+		}
+	});
+}
+
+function webServiceCallForRenewal(lNumber,expiryDate){
+	$.post('RenewUser?licenseNumber='+lNumber+'&expiryDate='+expiryDate, function(returnData) {
+		alert(lNumber)
+		//Assuming it is true
+		if(returnData){
+			alert("Renewal success for customer :"+lisenceNumber);
+		}else{
+			alert("Renewal failed for customer :"+lisenceNumber);
+		}
+	});
 }

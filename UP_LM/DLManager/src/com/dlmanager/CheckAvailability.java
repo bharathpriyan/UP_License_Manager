@@ -26,7 +26,7 @@ public class CheckAvailability extends HttpServlet{
 				 * Return true if already available
 				 * Return false if not available
 				 */
-				response.getWriter().write(false);
+				response.getWriter().write("false");
 				
 	        } catch (Exception ex) {
 	        	ex.printStackTrace();

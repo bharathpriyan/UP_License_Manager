@@ -498,7 +498,7 @@ function updateAge(){
 	document.getElementById("age").value = cDate.getFullYear()-customerDOB.getFullYear();
 }
 
-function validateLicenseNumber(){
+/*function validateLicenseNumber(){
 	if(userUpdateBool){
 		var licenseNumber = document.getElementById("licenseNumber").value;
 		$.get('CheckAvailability?lNumber='+licenseNumber, function(returnData) {
@@ -508,4 +508,4 @@ function validateLicenseNumber(){
 			}
 		});
 	}
-}
+}*/
