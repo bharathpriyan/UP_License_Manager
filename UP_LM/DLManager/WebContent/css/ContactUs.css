@@ -1,0 +1,22 @@
+html {
+  height: 100%;
+}
+body {
+	background-color: #4286F4;
+	margin: 0px;
+	height: 100%;
+	overflow: hidden;
+	color: white;
+	font-family: helvetica,Arial;
+	font-size: 20px;
+	font-weight: bold;
+}
+p{
+	text-align: center;
+	width : 80%;
+}
+.contactIcons{
+	height: 50px;
+	top: 15px;
+	position: relative;
+}
