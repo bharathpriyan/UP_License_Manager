@@ -3,3 +3,4 @@ PBP<11Dec2016>: MGM, run the latest code and check logout timer, redirect to app
 MGM : Bharath, please add all required JARs to DLManager\WebContent\WEB-INF\lib. dladmin.jar contains the files I created.
 MGM<27Dec2016> : New version with fetching customer details from search users and reports tab commited.
 MGM<31Dec2016> : New version with automatic expiry date calculation and customer details update.
+PBP<07Feb2016> : Logout UI and logic changed
