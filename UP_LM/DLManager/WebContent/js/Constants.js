@@ -1,4 +1,4 @@
-var appVersion = "v1.0.0"
+var appVersion = "v1.0.0";
 
 /**
  * fresh License screen constants
@@ -96,7 +96,6 @@ function getCookie(name) {
 		var re = new RegExp(name + "=([^;]+)"),value;
 		value = re.exec(document.cookie);
 		return (value != null) ? unescape(value[1]) : null;
-
 	}
 	else
 	{

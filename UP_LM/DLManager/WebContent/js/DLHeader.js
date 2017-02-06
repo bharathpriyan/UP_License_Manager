@@ -17,8 +17,17 @@ $(document).ready(function() {
 		proceedToLogout();
 	}
 	$("#settingsIcon").click(function(){
+		var btnOffset = $("#settingsIcon").offset();
+		$("#settingsWrapper").css("top",btnOffset.top+30);
+		$("#settingsWrapper").css("left",btnOffset.left-95);
 		$("#settingsWrapper").css("display","block");
 	});
+	$(".menuList").click(function(){
+		$("#settingsWrapper").css("display","none");
+	});
+    $(window).resize(function(){
+    	$("#settingsWrapper").css("display","none");
+    });
 });
 
 $('html').click(function(event) {                
@@ -79,4 +88,12 @@ function showSettingsPopup(){
 
 function closeSettingsPopup(){
 	$('#settingsWrapper').slideUp(800);
+}
+
+function proceedToContactUs(){
+	window.location = "ContactUs.html";
+}
+
+function proceedToAboutUs(){
+	window.location = "About.html";
 }
