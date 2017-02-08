@@ -1,10 +1,15 @@
+var popupMsg = document.getElementById('popupMsg');
+var modal = document.getElementById('myModal');
+
 $(document).ready(function() {
 	if(getCookie("userName")!=null){	
 		$.get('FetchAllReports?days=ALL', function(returnData) {
 			if(returnData){
 				populatetable(returnData);
 			}else{
-				alert("No user to show");
+				//alert("No user to show");
+				popupMsg.innerHTML = "0 customers fetched! Please use Fresh License section to add new customers.";
+				modal.style.display = "block";
 			}
 		});
 	}
@@ -12,7 +17,6 @@ $(document).ready(function() {
 		proceedToLogout();
 	}
 });
-
 
 function populatetable(returnData){
 	
@@ -31,3 +35,7 @@ function populatetable(returnData){
 	
 	$("#reportsTable").DataTable();
 }
+
+parent.$("html").click(function() {                
+	parent.$("#settingsWrapper").css("display","none");
+});

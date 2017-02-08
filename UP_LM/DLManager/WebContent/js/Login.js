@@ -1,3 +1,6 @@
+var popupMsg = document.getElementById('popupMsg');
+var modal = document.getElementById('myModal');
+
 /**
  * On Load Function
  */
@@ -28,7 +31,9 @@ function webServiceCall(username,password){
 			proceedToApplicationFeatures();
 		}
 		else{
-			alert("Please provide valid crendentials!");
+//			alert("Please provide valid crendentials!");
+			popupMsg.innerHTML = "Please provide valid crendentials!";
+			modal.style.display = "block";
 			password.value="";
 		}
 	});

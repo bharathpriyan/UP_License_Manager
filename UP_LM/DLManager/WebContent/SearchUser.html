@@ -5,12 +5,27 @@
 <title>Search User</title>
 <link href="css/dataTables.jqueryui.css" rel="stylesheet" />
 <link href="css/SearchUser.css" rel="stylesheet" />
+<link href="css/popupAlert.css" rel="stylesheet" />
 </head>
 <body>
 <div id="userListTablecontainer">
 <div id="tableHolder">
 </div>
 </div>
+<!-- Alert pop up Starts -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-body">
+      <p id="popupMsg">Customer added successfully</p>
+    </div>
+    <div class="modal-footer">
+      <button id="popupCloseBtn">OK</button>
+    </div>
+  </div>
+</div>
+<!-- Alert pop up Ends -->
 <script src="js/jquery.js"></script>
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/Constants.js"></script>

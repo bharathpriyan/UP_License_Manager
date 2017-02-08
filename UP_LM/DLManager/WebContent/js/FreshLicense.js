@@ -2,6 +2,8 @@
  * Create new entry for user
  * 
  */
+var popupMsg = document.getElementById('popupMsg');
+var modal = document.getElementById('myModal');
 var userUpdateBool=true;
 var firstNameToDB="", firstNameFromDB="";
 var lastNameToDB="",lastNameFromDB="";
@@ -69,7 +71,9 @@ $(document).ready(function() {
 					setFieldsForUserDetailUpdate(returnArray);
 					userUpdateBool = true;
 				}else{
-					alert("Fetch user details failed due to connectivity issues..Please try again");
+					//alert("Fetch user details failed due to connectivity issues..Please try again");
+					popupMsg.innerHTML = "Fetch user details failed due to connectivity issues..Please try again";
+					modal.style.display = "block";
 				}
 				parent.selectFreshLisenceTab();
 			});
@@ -411,10 +415,14 @@ function proceedToSave()
 	$.post('addNewCustomer?userData='+newCustomerDetails, function(returnData) {
 		//Assuming it is true
 		if(returnData){
-			alert("Congrats! Your customer details are saved successfully..");
+			//alert("Congrats! Your customer details are saved successfully..");
+			popupMsg.innerHTML = "Congrats! Your customer details are saved successfully..";
+			modal.style.display = "block";
 			setTimeout(resetInputs(),1000);
 		}else{
-			alert("User sign up failed due to connectivity issues..Please try again");
+			//alert("User sign up failed due to connectivity issues..Please try again");
+			popupMsg.innerHTML = "User sign up failed due to connectivity issues.Please try again later";
+			modal.style.display = "block";
 		}
 	});
 }
@@ -434,10 +442,14 @@ function proceedToUpdate()
 	$.post('UpdateCustomerDetail?userData='+newCustomerDetails, function(returnData) {
 		//Assuming it is true
 		if(returnData){
-			alert("Congrats! Your customer details are saved successfully..");
-			setTimeout(showSearchUserScreen(),5000);
+			//alert("Congrats! Your customer details are saved successfully..");
+			popupMsg.innerHTML = "Congrats! Your customer details are saved successfully..";
+			modal.style.display = "block";
+			//setTimeout(showSearchUserScreen(),5000);
 		}else{
-			alert("Update customer details failed due to connectivity issues..Please try again");
+			//alert("Update customer details failed due to connectivity issues..Please try again");
+			popupMsg.innerHTML = "Congrats! Your customer details are saved successfully..";
+			modal.style.display = "block";
 		}
 	});
 }
@@ -509,3 +521,7 @@ function updateAge(){
 		});
 	}
 }*/
+
+parent.$('html').click(function(event) {                
+	$("#settingsWrapper").css("display","none");
+});

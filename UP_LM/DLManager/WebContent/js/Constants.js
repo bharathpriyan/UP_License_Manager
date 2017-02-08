@@ -37,7 +37,8 @@ var ageLimitMax = 100;
 var licenseExpiryPeriodInYears = 20;
 var logoutTimeinMS = 180000;
 
-
+var modal = document.getElementById('myModal');
+var btn = document.getElementById("popupCloseBtn");
 
 
 function proceedToLogout(){
@@ -102,4 +103,16 @@ function getCookie(name) {
 		var value = localStorage.getItem(name);
 		return value;
 	}
+}
+
+//When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+//When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "none";
 }

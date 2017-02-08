@@ -8,6 +8,8 @@ $(document).ready(function() {
 });
 
 var exDate = "";
+var popupMsg = document.getElementById('popupMsg');
+var modal = document.getElementById('myModal');
 
 function populatetable(returnData){
 	
@@ -43,7 +45,9 @@ function fetchReports(){
 		if(returnData){
 			populatetable(returnData);
 		}else{
-			alert("No customer matching the search criteria");
+			//alert("No customer matching the search criteria");
+			popupMsg.innerHTML = "No matching customer found for your search criteria";
+			modal.style.display = "block";
 		}
 	});
 }
@@ -78,13 +82,13 @@ function fetchDetailsByLNumber(lisenceNumber){
 	$.get('FetchUserDetails?lNumber='+lisenceNumber, function(returnData) {
 		//Assuming it is true
 		if(returnData!=null){
-			alert('Pogala')
 			returnData = returnData.substring(1,returnData.length-1);
 			var returnArray = returnData.split(",");
 			setExpiryDate(returnArray);
-			alert(exDate);
 		}else{
-			alert("Renewal failed due to connectivity issues..Please try again");
+			//alert("Renewal failed due to connectivity issues. Please try again");
+			popupMsg.innerHTML = "Renewal failed due to connectivity issues. Please try again";
+			modal.style.display = "block";
 		}
 	});
 }
@@ -93,7 +97,9 @@ function renewSelectedUsers(){
 	var fields = $("input[class='userCheckBoxClass']:checked"); 
     if (fields.length == 0) 
     { 
-        alert('Please select atleast one user for renewal'); 
+        //alert('Please select atleast one user for renewal');
+        popupMsg.innerHTML = "Please select atleast one user for renewal";
+		modal.style.display = "block";
     } 
     else 
     { 
@@ -101,43 +107,19 @@ function renewSelectedUsers(){
         	var lNumber = fields[int].id;
         	$.post('RenewUser?licenseNumber='+fields[int].id, function(returnData) {
         		if(returnData){
-        			alert("Renewal success for customer :"+lNumber);
+        			//alert("Renewal success for customer :"+lNumber);
+        			popupMsg.innerHTML = "Renewal success for customer :"+lNumber;
+					modal.style.display = "block";
         		}else{
         			alert("Renewal failed for customer :"+lNumber);
+        			popupMsg.innerHTML = "Renewal failed for customer :"+lNumber;
+					modal.style.display = "block";
         		}
         	});
-        	
-//        	$.when(fetchDetailsByLNumber(fields[int].id)).then(webServiceCallForRenewal(fields[int].id,exDate));
-        	/*if(fetchDetailsByLNumber(fields[int].id)=="true"){
-        	alert("back");
-        	if(exDate && fields[int].id){
-        		webServiceCallForRenewal(fields[int].id,newExpiryDate);
-        	}
-        	}*/
 		} 
     }
 }
 
-function webServiceCallForRenewal(lNumber){
-	$.post('RenewUser?licenseNumber='+lNumber, function(returnData) {
-		alert(lNumber)
-		//Assuming it is true
-		if(returnData){
-			alert("Renewal success for customer :"+lisenceNumber);
-		}else{
-			alert("Renewal failed for customer :"+lisenceNumber);
-		}
-	});
-}
-
-function webServiceCallForRenewal(lNumber,expiryDate){
-	$.post('RenewUser?licenseNumber='+lNumber+'&expiryDate='+expiryDate, function(returnData) {
-		alert(lNumber)
-		//Assuming it is true
-		if(returnData){
-			alert("Renewal success for customer :"+lisenceNumber);
-		}else{
-			alert("Renewal failed for customer :"+lisenceNumber);
-		}
-	});
-}
+parent.$('html').click(function(event) {                
+	$("#settingsWrapper").css("display","none");
+});
