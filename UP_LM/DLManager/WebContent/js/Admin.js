@@ -1,4 +1,6 @@
 var infoToUserEl = document.getElementById("infoToUserContainer");
+var popupMsg = document.getElementById('popupMsg');
+var modal = document.getElementById('myModal');
 
 /**
  * on load
@@ -117,10 +119,14 @@ function saveListener(){
 	$.post('SignUp?userData='+registrationDetails, function(returnData) {
 		//Assuming it is true
 		if(returnData){
-			alert("Congrats! User is registered successfully..");
+			//alert("Congrats! User is registered successfully..");
+			popupMsg.innerHTML = "Congrats! User is registered successfully..";
+			modal.style.display = "block";
 			setTimeout(resetInputs(),10000);
 		}else{
-			alert("User sign up failed :( due to connectivity issues..Please try again");
+			//alert("User sign up failed :( due to connectivity issues..Please try again");
+			popupMsg.innerHTML = "User sign up failed due to connectivity issues! Please try again";
+			modal.style.display = "block";
 		}
 	});
 }

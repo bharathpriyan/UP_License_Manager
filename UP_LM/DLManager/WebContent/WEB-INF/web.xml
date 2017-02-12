@@ -79,4 +79,12 @@
 		<servlet-name>CheckAvailability</servlet-name>
 		<url-pattern>/CheckAvailability</url-pattern>
 	</servlet-mapping>
+		<servlet>
+		<servlet-name>ImportFile</servlet-name>
+		<servlet-class>com.dlmanager.ImportFile</servlet-class>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>ImportFile</servlet-name>
+		<url-pattern>/uploadServlet</url-pattern>
+	</servlet-mapping>
 </web-app>
