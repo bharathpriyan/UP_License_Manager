@@ -1,7 +1,5 @@
 package com.dlmanager;
 
-import java.util.Arrays;
-
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,18 +14,12 @@ public class CheckAvailability extends HttpServlet{
 	            throws javax.servlet.ServletException, java.io.IOException {
 	        try {
 	        	String lNumber = request.getParameter("lNumber");
-	        	
-//	        	Admin a=(Admin) request.getSession().getAttribute("validAdmin");
-//	        	String[] customerDetails = a.retrieveCustomerDetails(lNumber);
-	        	
-	        	response.setContentType("text/plain");
-				response.setCharacterEncoding("UTF-8");
-				/**
-				 * Return true if already available
-				 * Return false if not available
-				 */
-				response.getWriter().write("false");
-				
+	        	Admin a=(Admin) request.getSession().getAttribute("validAdmin");
+	        	if(a.isLinceseUnique("LIC_NUM", lNumber)){
+	        		response.setContentType("text/plain");
+					response.setCharacterEncoding("UTF-8");
+					response.getWriter().write("true");
+	        	}	
 	        } catch (Exception ex) {
 	        	ex.printStackTrace();
 	        }

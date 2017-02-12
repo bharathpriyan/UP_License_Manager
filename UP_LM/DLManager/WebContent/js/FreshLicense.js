@@ -510,19 +510,19 @@ function updateAge(){
 	document.getElementById("age").value = cDate.getFullYear()-customerDOB.getFullYear();
 }
 
-/*function validateLicenseNumber(){
+function validateLicenseNumber(){
 	if(userUpdateBool){
 		var licenseNumber = document.getElementById("licenseNumber").value;
 		$.get('CheckAvailability?lNumber='+licenseNumber, function(returnData) {
 			//True if already available
-			if(returnData){
+			if(returnData!='true'){
 				alert("License number is already available in our records!");
 			}else{
 				return;
 			}
 		});
 	}
-}*/
+}
 
 parent.$('html').click(function(event) {                
 	$("#settingsWrapper").css("display","none");
