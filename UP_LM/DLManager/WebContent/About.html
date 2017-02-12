@@ -1,9 +1,54 @@
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>Contact Us</title>
+<link href="css/DLHeader.css" rel="stylesheet" />
+<link href="css/About.css" rel="stylesheet" />
+</head>
 <body>
+<div id="headerContainer">
+<div id="appName"><span id="appNameSpan">Driving License Manager</span><span id="appVersionSpan"></span>
+<div id="copyRightInfo"><span>&copy உழவுப்பறை</span></div>
+</div>
+<div id="LoginDetails">Welcome <span id="loginNameSpan"></span> &#128522;<div><img id="settingsIcon" src="images/settingsIcon.png"></div></div>
+<div id="settingsWrapper" class="square">
+      <div class="menuList" onclick="proceedToLogout()">Logout</div>
+      <div class="menuList" onclick="proceedToAboutUs()">About</div>
+      <div class="menuList" onclick="proceedToContactUs()">Contact</div>
+</div>
+</div>
+<div id="aboutContent">
 
-
-
-
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/Constants.js"></script>
+<script type="text/javascript">
+function backToMainScreen(){
+	window.location = "DLHeader.html";
+}
+$(document).ready(function() {
+$("#settingsIcon").click(function(){
+	var btnOffset = $("#settingsIcon").offset();
+	$("#settingsWrapper").css("top",btnOffset.top+30);
+	$("#settingsWrapper").css("left",btnOffset.left-95);
+	$("#settingsWrapper").css("display","block");
+});
+$(".menuList").click(function(){
+	$("#settingsWrapper").css("display","none");
+});
+$(window).resize(function(){
+	$("#settingsWrapper").css("display","none");
+});
+document.getElementById("appVersionSpan").innerHTML = appVersion;
+});
+$('html').click(function(event) {                
+	if(! (event.target.className.indexOf("menuList") > -1)
+			&& ! (event.target.className.indexOf("square") > -1)
+			&& ! (event.target.id.indexOf("settingsIcon") > -1)){
+		$("#settingsWrapper").css("display","none");
+	}
+});
+</script>
 </body>
 </html>

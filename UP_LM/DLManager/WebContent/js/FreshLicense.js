@@ -137,6 +137,14 @@ function setExpiryDate(){
 	if(userUpdateBool){
 		if((licenseTypeFromDB == "Batch" && licenseTypeToDB == "HTV") || (licenseTypeFromDB == "HTV" && licenseTypeToDB == "HTV")){
 			expiryDate.setYear(issuedDate.getFullYear()+3);
+		}else if((licenseTypeFromDB == "LMVH" || licenseTypeFromDB == "MCWG") && (licenseTypeToDB == "LMVH" || licenseTypeToDB == "MCWG")){
+			if(ageToDB<=40){
+				expiryDate.setYear(issuedDate.getFullYear()+(40-ageToDB));
+			}else if(ageToDB>40 && ageToDB<=50){
+				expiryDate.setYear(issuedDate.getFullYear()+10);
+			}else if(ageToDB>50){
+				expiryDate.setYear(issuedDate.getFullYear()+5);
+			}
 		}else if(licenseTypeFromDB == "HTV" && licenseTypeToDB == "HAZ"){
 			var tempDate = new Date(issuedDate);
 			tempDate.setMonth(issuedDate.getMonth()+10)

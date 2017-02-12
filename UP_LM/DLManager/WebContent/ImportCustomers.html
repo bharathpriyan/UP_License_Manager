@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Contact Us</title>
+<link href="css/popupAlert.css" rel="stylesheet" />
 <link href="css/DLHeader.css" rel="stylesheet" />
-<link href="css/ContactUs.css" rel="stylesheet" />
+<link href="css/ImportCustomers.css" rel="stylesheet" />
 </head>
-<body id="mainBody">
+<body>
 <div id="headerContainer">
 <div id="appName"><span id="appNameSpan">Driving License Manager</span><span id="appVersionSpan"></span>
 <div id="copyRightInfo"><span>&copy உழவுப்பறை</span></div>
@@ -18,21 +19,28 @@
       <div class="menuList" onclick="proceedToContactUs()">Contact</div>
 </div>
 </div>
-<div id="contactContentHolder">
-<div id="backBtn" onclick="backToMainScreen();">
-    <span id="x">&lt&nbsp;&nbsp;&nbsp;Back</span>
+<div id="aboutContent">
+<p>Hassle free multiple customer addition through csv/xls files:</p>
+<input type="file" id="fileBrowserId">
+<button id="importBtn" onclick="importCust()">Import</button>
 </div>
-<div><p>
-We are always there to help you. Please feel free to contact us through the following options:
-</p>
+	<!-- Alert pop up Starts -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-body">
+      <p id="popupMsg">Customer added successfully</p>
+    </div>
+    <div class="modal-footer">
+      <button id="popupCloseBtn">OK</button>
+    </div>
+  </div>
 </div>
-<div style="margin-left:15%;">Email &nbsp;<img class="contactIcons" src="images/mail-icon-128.png"> : uzhavupparai@gmail.com
-</div><br>
-<div style="margin-left:15%;">Mobile <img class="contactIcons" src="images/Mix_color_5__phone-128.png"> : 1234567890
-</div>
-</div>
+<!-- Alert pop up Ends -->
 <script src="js/jquery.js"></script>
 <script src="js/Constants.js"></script>
+<script src="js/ImportCustomers.js"></script>
 <script type="text/javascript">
 function backToMainScreen(){
 	window.location = "DLHeader.html";
