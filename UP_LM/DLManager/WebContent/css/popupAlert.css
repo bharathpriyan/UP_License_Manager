@@ -64,7 +64,7 @@
     padding: 2px 16px 5px 2px;
     color: white;
 }
-#popupCloseBtn{
+#popupCloseBtn,#popupCloseBtnReports{
 	background-color: blue;
 	width: 60px;
 	height: 25px;

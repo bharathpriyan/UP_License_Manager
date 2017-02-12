@@ -10,6 +10,8 @@ $(document).ready(function() {
 var exDate = "";
 var popupMsg = document.getElementById('popupMsg');
 var modal = document.getElementById('myModal');
+var btn = document.getElementById("popupCloseBtnReports");
+var reloadBool = false;
 
 function populatetable(returnData){
 	
@@ -94,6 +96,7 @@ function fetchDetailsByLNumber(lisenceNumber){
 }
 
 function renewSelectedUsers(){
+	reloadBool = false;
 	var fields = $("input[class='userCheckBoxClass']:checked"); 
     if (fields.length == 0) 
     { 
@@ -116,10 +119,20 @@ function renewSelectedUsers(){
 					modal.style.display = "block";
         		}
         	});
-		} 
+		}
+        reloadBool = true;
     }
 }
 
 parent.$('html').click(function(event) {                
 	$("#settingsWrapper").css("display","none");
 });
+
+//When the user clicks the button, open the modal 
+btn.onclick = function() {
+	modal.style.display = "none";
+	if(reloadBool){
+		reloadBool = false;
+		window.location.reload();
+	}
+}

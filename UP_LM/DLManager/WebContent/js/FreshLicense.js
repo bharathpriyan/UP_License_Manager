@@ -517,6 +517,8 @@ function updateAge(){
 			//True if already available
 			if(returnData){
 				alert("License number is already available in our records!");
+			}else{
+				return;
 			}
 		});
 	}
