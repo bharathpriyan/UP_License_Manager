@@ -18,6 +18,9 @@ $(document).ready(function() {
 	}
 });
 
+function gotoImport(){
+	location.href = "ImportCustomers.html";
+}
 function populatetable(returnData){
 	
 	var userArray = returnData;

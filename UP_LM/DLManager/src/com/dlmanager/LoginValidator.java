@@ -15,8 +15,8 @@ public class LoginValidator extends HttpServlet{
 	    }
 
 	    public void doPost(HttpServletRequest request, HttpServletResponse response)
-	            throws javax.servlet.ServletException, java.io.IOException {
-	    	 try {
+	    		throws javax.servlet.ServletException, java.io.IOException  {
+//	    	 try {
 		        	Admin a=new Admin.AdminBuilder(request.getParameter("uName"),request.getParameter("pWord")).build();
 		        	if(a.validateLogin()){
 		        		request.getSession().setAttribute("validAdmin", a);
@@ -28,9 +28,9 @@ public class LoginValidator extends HttpServlet{
 			            response.setCharacterEncoding("UTF-8");
 			            response.getWriter().write("false");
 		        	}
-		        } catch (Exception ex) {
-		        	ex.printStackTrace();
-		        }
+//		        } catch (Exception ex) {
+//		        	ex.printStackTrace();
+//		        }
 	    }
 	   
 	     public void init( ){
