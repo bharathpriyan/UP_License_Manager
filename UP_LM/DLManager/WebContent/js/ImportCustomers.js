@@ -15,6 +15,20 @@ function importCust(){
 	});
 }
 
+function downloadTemplate(){
+	$.get('uploadServlet', function(returnData) {
+		if(returnData=="0"){
+			//alert("Congrats! User is registered successfully..");
+			popupMsg.innerHTML = "Success";
+			modal.style.display = "block";
+		}else{
+			//alert("User sign up failed :( due to connectivity issues..Please try again");
+			popupMsg.innerHTML = "Fail";
+			modal.style.display = "block";
+		}
+	});
+}
+
 $(document).ready(function() {
 	$("#settingsWrapper").css("display","none");
 	document.getElementById("appVersionSpan").innerHTML = appVersion;
