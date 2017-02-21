@@ -14,8 +14,8 @@
 <tr><td class="userFieldLable">Name&nbsp;:&nbsp;</td><td><input type="text" id="firstName" class="userInputClass" placeholder="first name"/><input type="text" id="lastName" class="userInputClass" placeholder="last name"/></td></tr>
 <tr><td class="userFieldLable">User Name&nbsp;<span style="color:red;">*</span>:&nbsp;</td><td><input type="text" id="userName" class="userInputClass" required="required" onblur="alert('good')"/></td></tr>
 <tr><td class="userFieldLable">Password&nbsp;<span style="color:red;">*</span>:&nbsp;</td><td><input type="password" id="password" class="userInputClass" required="required"/></td></tr>
-<tr><td class="userFieldLable">Mobile Number&nbsp;<span style="color:red;">*</span>:&nbsp;</td><td><input type="tel" id="mobNumber" maxlength="10" class="userInputClass"/></td></tr>
-<tr><td class="userFieldLable">Alternate Mobile Number&nbsp;:&nbsp;</td><td><input type="tel" id="altMobNumber" maxlength="10" class="userInputClass"/></td></tr>
+<tr><td class="userFieldLable">Mobile Number&nbsp;<span style="color:red;">*</span>:&nbsp;</td><td><input type="text" id="mobNumber" maxlength="10" class="userInputClass" onkeypress="return isNumberKey(event)"/></td></tr>
+<tr><td class="userFieldLable">Alternate Mobile Number&nbsp;:&nbsp;</td><td><input type="text" id="altMobNumber" maxlength="10" class="userInputClass" onkeypress="return isNumberKey(event)"/></td></tr>
 <tr><td class="userFieldLable">Email&nbsp;:&nbsp;</td><td><input type="email" id="emailId" class="userInputClass" placeholder="abc@gmail.com"/></td></tr>
 </table>
 </div>

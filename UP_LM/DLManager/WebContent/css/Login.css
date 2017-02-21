@@ -5,7 +5,7 @@ box-sizing: border-box;
 *:focus {
 	outline: none;
 }
-body {font-family: Arial;background-color: #3498DB;padding: 50px;}
+body {font-family: Arial;background-color: #384C68;padding: 50px;}
 .login {
 width: 30%;
 margin: 10% 0% 0% 35%;
@@ -41,13 +41,13 @@ transition: border .5s;
 }
 
 input:focus {
-border: 2px solid #3498DB;
+border: 2px solid #384C68;
 box-shadow: none;
 }
 
 .btn {
   border: 2px solid transparent;
-  background: #3498DB;
+  background: #384C68;
   color: #ffffff;
   font-size: 16px;
   line-height: 25px;

@@ -514,11 +514,15 @@ function updateAge(){
 	var dateOfBirth = document.getElementById("dateOfBirth").value;
 	var customerDOB = new Date(dateOfBirth);
 	var cDate = new Date();
-
-	document.getElementById("age").value = cDate.getFullYear()-customerDOB.getFullYear();
+	var ageCalculated = cDate.getFullYear()-customerDOB.getFullYear();
+	customerDOB.setFullYear(cDate.getFullYear());
+	if(cDate.getTime()<customerDOB.getTime()){
+		ageCalculated = ageCalculated-1;
+	}
+	document.getElementById("age").value = ageCalculated;
 }
 
-function validateLicenseNumber(){
+/*function validateLicenseNumber(){
 	if(userUpdateBool){
 		var licenseNumber = document.getElementById("licenseNumber").value;
 		$.get('CheckAvailability?lNumber='+licenseNumber, function(returnData) {
@@ -530,7 +534,7 @@ function validateLicenseNumber(){
 			}
 		});
 	}
-}
+}*/
 
 parent.$('html').click(function(event) {                
 	$("#settingsWrapper").css("display","none");

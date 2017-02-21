@@ -12,7 +12,7 @@ body {
 	width:100%;
 	height:50px;
 	margin:0px;
-	background-color: #3498DB;
+	background-color:#384C68;
 	color: white;
     font-family: helvetica;
     display:block;
@@ -50,7 +50,7 @@ body {
 .tabsClass{
     display: inline-block;
     height: 50px;
-    background-color: lightseagreen;
+    background-color: #4E5E75;
     width: 33.33%;
     border-right: 1px solid silver;
     -webkit-box-sizing: border-box;
@@ -60,7 +60,7 @@ body {
     line-height: 50px;
 }
 .tabsClass:HOVER {
-	background-color: #019189;
+	background-color: #2e3744;
 	-moz-box-shadow: 3px 3px 3px 3px #5B5B5B;
 	-webkit-box-shadow: 3px 3px 3px 3px #5B5B5B;
 	box-shadow: 3px 3px 3px 3px #5B5B5B;
@@ -81,7 +81,7 @@ body {
     height: 100%;
 }
 .tabsClassSelected{
-	background-color: #019189;
+	background-color: #2E3744;
 }
 #logoUP{
 	width: 20px;
@@ -131,7 +131,7 @@ body{
 	padding: 2%;
 	border-radius: 10px;
 	margin-top: 2%;
-	background-color: #3498DB;
+	background-color: #384C68;
 	font-size: 15px;
 	font-family: helvatica,Arial;
 	color: #FFF;

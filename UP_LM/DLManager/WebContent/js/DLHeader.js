@@ -89,11 +89,3 @@ function showSettingsPopup(){
 function closeSettingsPopup(){
 	$('#settingsWrapper').slideUp(800);
 }
-
-function proceedToContactUs(){
-	window.location = "ContactUs.html";
-}
-
-function proceedToAboutUs(){
-	window.location = "About.html";
-}

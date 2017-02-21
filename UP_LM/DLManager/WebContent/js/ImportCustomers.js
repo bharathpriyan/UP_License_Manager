@@ -4,29 +4,19 @@ var modal = document.getElementById('myModal');
 function importCust(){
 	$.post('uploadServlet', function(returnData) {
 		if(returnData=="0"){
-			//alert("Congrats! User is registered successfully..");
 			popupMsg.innerHTML = "Success";
 			modal.style.display = "block";
 		}else{
-			//alert("User sign up failed :( due to connectivity issues..Please try again");
 			popupMsg.innerHTML = "Fail";
 			modal.style.display = "block";
 		}
 	});
 }
-
+/**
+ * Download template
+ */
 function downloadTemplate(){
-	$.get('uploadServlet', function(returnData) {
-		if(returnData=="0"){
-			//alert("Congrats! User is registered successfully..");
-			popupMsg.innerHTML = "Success";
-			modal.style.display = "block";
-		}else{
-			//alert("User sign up failed :( due to connectivity issues..Please try again");
-			popupMsg.innerHTML = "Fail";
-			modal.style.display = "block";
-		}
-	});
+	location.href = "importCustTemplate.csv";
 }
 
 $(document).ready(function() {

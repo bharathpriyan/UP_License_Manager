@@ -12,7 +12,7 @@ body
     padding: 2%;
     border-radius: 10px;
     margin-top: 2%;
-    background-color: #3498DB;
+    background-color: #384C68;
     font-size: 15px;
     font-family: helvatica, Arial;
     color: white;
@@ -84,7 +84,7 @@ body
     margin-left: 20%;
 }
 #infoToUserContainer{
-    background-color: #f46542;
+    background-color: #2E3744;
     font-size: 15px;
     font-family: helvatica,Arial;
     color: white;

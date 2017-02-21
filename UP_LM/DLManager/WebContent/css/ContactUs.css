@@ -7,7 +7,7 @@ body {
 	overflow: hidden;
 }
 #contactContentHolder{
-	background-color: #3498DB;
+	background-color: #384C68;
 	overflow: hidden;
 	color: white;
 	font-family: helvetica,Arial;
@@ -16,8 +16,12 @@ body {
 	height:100%;
 }
 p{
-	text-align: center;
-	width : 80%;
+	text-align: left;
+    width: 45%;
+    margin-left: 20%;
+    border-top: 1px solid #C0C0C0;
+    border-bottom: 1px solid #C0C0C0;
+    padding: 20px;
 }
 .contactIcons{
 	height: 50px;
@@ -25,7 +29,7 @@ p{
 	position: relative;
 }
 #backBtn {
-    background: none repeat scroll 0% 0% #545454;
+    background: none repeat scroll 0% 0% #010814;
     color: #FFF;
     font-family: 'Helvetica','Arial',sans-serif;
     font-size: 15px;
@@ -38,11 +42,10 @@ p{
     left: 2%;
     position: relative;
     cursor: pointer;
-    top:5%;
 }
 
 #backBtn:hover{
-	background-color: #010814;
+	background: #01066E;
 }
 
 #x{
