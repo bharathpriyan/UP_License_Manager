@@ -43,3 +43,22 @@ $(document).ready(function() {
     	$("#settingsWrapper").css("display","none");
     });
 });
+
+function showMsg(event){
+//	var btnOffset = "";
+//	if(event.parentElement.id == "templateContainer"){
+//		document.getElementById("infoToUserContainer").innerHTML = "Get the template. Fill it up and upload. As simple as that!";
+//		btnOffset = $("templateContainer").offset();
+//	}
+//	if(event.parentElement.id == "importContainer"){
+//		document.getElementById("infoToUserContainer").innerHTML = "Hassale free mutiple customer addition to the app!";
+//		btnOffset = $("importContainer").offset();
+//	}
+//	$("#infoToUserContainer").css("display","none");
+//	$("#infoToUserContainer").css("top",btnOffset.top-10);
+//	$("#infoToUserContainer").css("left",btnOffset.left+40);
+}
+
+function hideMsg(){
+	$("#infoToUserContainer").css("display","block");
+}

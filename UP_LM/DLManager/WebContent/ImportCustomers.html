@@ -20,13 +20,10 @@
 </div>
 </div>
 <div id="aboutContent">
-<p>Looking to add multiple customers? Get a template from us, fill it up and upload!</p>
-<div>Template : <button id="downloadBtn" onclick="downloadTemplate()">Download</button></div>
-<br>
-<br>
-<br>
-<p>Hassle free multiple customer addition through csv/xls files:</p>
-<button id="importBtn" onclick="importCust()">Import</button>
+<div class="paraTitleTemplate" id="templateContainer">Get a Template : <button id="downloadBtn" onclick="downloadTemplate()">Download</button>
+<img class="infoIcon" src="images/infoicon.png" onmouseover="showMsg(this);"></div>
+<div class="paraTitleImport" id="importContainer" onclick="showMsg(this);">Import From a File (.csv): <button id="importBtn" onclick="importCust()">Choose File</button>
+<img class="infoIcon" src="images/infoicon.png"></div>
 </div>
 	<!-- Alert pop up Starts -->
 <div id="myModal" class="modal">
@@ -42,6 +39,8 @@
   </div>
 </div>
 <!-- Alert pop up Ends -->
+<div id="infoToUserContainer">
+</div>
 <script src="js/jquery.js"></script>
 <script src="js/Constants.js"></script>
 <script src="js/ImportCustomers.js"></script>
@@ -63,6 +62,7 @@ $(window).resize(function(){
 	$("#settingsWrapper").css("display","none");
 });
 document.getElementById("appVersionSpan").innerHTML = appVersion;
+
 });
 $('html').click(function(event) {                
 	if(! (event.target.className.indexOf("menuList") > -1)
