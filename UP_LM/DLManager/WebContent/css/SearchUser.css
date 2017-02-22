@@ -3,6 +3,7 @@ html{
 }
 body{
 	height: 97%;
+	font-family: helvatica, Arial;
 }
 #tableHolder{
 	text-align: center;
@@ -11,6 +12,14 @@ body{
 .odd{
 	background-color: #dddddd !important;
 }
+
+table.dataTable th {
+    background-color: #57677f;
+    color: white;
+    border: 1px solid white;
+    font-family: helvatica, Arial;
+}
+
 #userListTablecontainer{
     width: 90%;
     margin: auto;

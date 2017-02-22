@@ -8,22 +8,11 @@
 <link href="css/ImportCustomers.css" rel="stylesheet" />
 </head>
 <body>
-<div id="headerContainer">
-<div id="appName"><span id="appNameSpan">Driving License Manager</span><span id="appVersionSpan"></span>
-<div id="copyRightInfo"><span>&copy; உழவுப்பறை</span></div>
-</div>
-<div id="LoginDetails">Welcome <span id="loginNameSpan"></span> &#128522;<div><img id="settingsIcon" src="images/settingsIcon.png"></div></div>
-<div id="settingsWrapper" class="square">
-      <div class="menuList" onclick="proceedToLogout()">Logout</div>
-      <div class="menuList" onclick="proceedToAboutUs()">About</div>
-      <div class="menuList" onclick="proceedToContactUs()">Contact</div>
-</div>
-</div>
 <div id="aboutContent">
 <div class="paraTitleTemplate" id="templateContainer">Get a Template : <button id="downloadBtn" onclick="downloadTemplate()">Download</button>
-<img class="infoIcon" src="images/infoicon.png" onmouseover="showMsg(this);"></div>
+<img class="infoIcon" id="infoIconTemplate" src="images/infoicon.png" onmouseover="showMsg(this);" onmouseout="hideMsg()"></div>
 <div class="paraTitleImport" id="importContainer" onclick="showMsg(this);">Import From a File (.csv): <button id="importBtn" onclick="importCust()">Choose File</button>
-<img class="infoIcon" src="images/infoicon.png"></div>
+<img class="infoIcon" id="infoIconImport" src="images/infoicon.png" onmouseover="showMsg(this);" onmouseout="hideMsg()"></div>
 </div>
 	<!-- Alert pop up Starts -->
 <div id="myModal" class="modal">

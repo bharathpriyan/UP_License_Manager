@@ -96,4 +96,5 @@ table.dataTable th {
     float: left;
     width: 10%;
     font-weight: bold;
+    display: none;
 }

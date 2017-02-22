@@ -538,4 +538,26 @@ function updateAge(){
 
 parent.$('html').click(function(event) {                
 	$("#settingsWrapper").css("display","none");
+	$("#infoToUserStatic").css("display","none");
+	$("#infoToUserContainer").css("display","none");
 });
+
+$('html').click(function(event) {                
+	$("#infoToUserStatic").css("display","none");
+	if(event.target.id !="saveDetails"){
+	$("#infoToUserContainer").css("display","none");
+	}
+});
+
+function showMsg(event){
+	$("#infoToUserContainer").css("display","none");
+	document.getElementById("infoToUserStatic").innerHTML = '<div id="importBtnPopup" onclick="navigateToImport()">Import From a File</div>';
+	var btnOffset = $("#infoIconImport").offset();
+	$("#infoToUserStatic").css("top",btnOffset.top-10);
+	$("#infoToUserStatic").css("left",btnOffset.left+40);
+	$("#infoToUserStatic").css("display","block");
+}
+
+function navigateToImport(){
+	window.location.href = "ImportCustomers.html";
+}

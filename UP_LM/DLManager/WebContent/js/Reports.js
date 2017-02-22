@@ -34,6 +34,7 @@ function populatetable(returnData){
         "paging":         false
 	});
 	$(".dataTables_length").css("display","none");
+	$("#renewBtn").css("display","block");
 }
 
 function fetchReports(){
@@ -50,6 +51,7 @@ function fetchReports(){
 			//alert("No customer matching the search criteria");
 			popupMsg.innerHTML = "No matching customer found for your search criteria";
 			modal.style.display = "block";
+			$("#renewBtn").css("display","none");
 		}
 	});
 }

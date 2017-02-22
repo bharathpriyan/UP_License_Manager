@@ -70,6 +70,9 @@ body
     margin-right: 20%;
     font-weight: bold;
 }
+#saveDetails:HOVER{
+	color: orange;
+}
 #resetInputs{
 	border-radius: 5px;
     background-color: #050505;
@@ -89,7 +92,7 @@ body
     width: 20px;
     cursor:pointer;
 }
-#infoToUserContainer{
+#infoToUserContainer,#infoToUserStatic{
     background-color: #2E3744;
     font-size: 15px;
     font-family: helvatica,Arial;
@@ -108,4 +111,25 @@ body
 #lastName,#age{
 	width: 41%;
 	margin-left:0.5%
+}
+.infoIcon {
+	height: 26px;
+	width: 30px;
+	float: right;
+	position: relative;
+	display: inline-block;
+	right: 23%;
+}
+#importBtnPopup{
+	border: 1px solid silver;
+	width: 65%;
+	margin: 2% 2% 2% 15%;
+	color: white;
+	border-radius: 5px;
+	padding: 4%;
+	cursor: pointer;
+	font-weight: bold;
+}
+#importBtnPopup:HOVER {
+	color: orange;
 }
