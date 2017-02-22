@@ -3,12 +3,20 @@ var modal = document.getElementById('myModal');
 
 function importCust(){
 	$.post('uploadServlet', function(returnData) {
+		modal.style.display = "block";
 		if(returnData=="0"){
 			popupMsg.innerHTML = "Success";
-			modal.style.display = "block";
-		}else{
-			popupMsg.innerHTML = "Fail";
-			modal.style.display = "block";
+		}else if(returnData=="1"){
+			popupMsg.innerHTML = "Please choose a csv file";
+			setTimeout(importCust,2000);
+		}else if(returnData.charAt(0)=="2"){
+			popupMsg.innerHTML = "Some records are not imported. Please check "+returnData.substring(1);
+		}else if(returnData=="4"){
+			popupMsg.innerHTML = "Cannot open the file. Try again";
+		}else if(returnData=="3"){
+			popupMsg.innerHTML = "File not found. Try again";
+		}else if(returnData=="5"){
+			popupMsg.innerHTML = "Invalid file. Try again";
 		}
 	});
 }
