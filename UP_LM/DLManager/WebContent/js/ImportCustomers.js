@@ -50,6 +50,15 @@ $(document).ready(function() {
     $(window).resize(function(){
     	$("#settingsWrapper").css("display","none");
     });
+    /**
+     * Listen to enter key and close the custom alert popup if open
+     */
+    document.querySelector('body').addEventListener('keypress', function (e) {
+        var key = e.which || e.keyCode;
+        if (key === 13) { // 13 is enter
+          closeAlertPopup();
+        }
+    });
 });
 
 function showMsg(event){

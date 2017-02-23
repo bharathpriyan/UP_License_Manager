@@ -134,3 +134,7 @@ function isNumberKey(evt)
 
    return true;
 }
+
+function closeAlertPopup(){
+	document.getElementById('myModal').style.display = "none";
+}

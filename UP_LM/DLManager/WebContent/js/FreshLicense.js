@@ -85,6 +85,16 @@ $(document).ready(function() {
 		proceedToLogout();
 	}
 
+    /**
+     * Listen to enter key and close the custom alert popup if open
+     */
+    document.querySelector('body').addEventListener('keypress', function (e) {
+        var key = e.which || e.keyCode;
+        if (key === 13) { // 13 is enter
+          closeAlertPopup();
+        }
+    });
+    
 });
 
 function setFieldsForUserDetailUpdate(returnData){
@@ -133,7 +143,6 @@ function setExpiryDate(){
 	var issuedDate = new Date(issuedDateVal);
 	var oldExpiryDate = new Date(expireDateFromDB);
 	var expiryDate = new Date(issuedDateVal);
-
 	if(userUpdateBool){
 		if((licenseTypeFromDB == "Batch" && licenseTypeToDB == "HTV") || (licenseTypeFromDB == "HTV" && licenseTypeToDB == "HTV")){
 			expiryDate.setYear(issuedDate.getFullYear()+3);
@@ -520,6 +529,7 @@ function updateAge(){
 		ageCalculated = ageCalculated-1;
 	}
 	document.getElementById("age").value = ageCalculated;
+	ageToDB = ageCalculated;
 }
 
 /*function validateLicenseNumber(){
