@@ -16,6 +16,10 @@ $(document).ready(function() {
  * Servlet call to validate login credentials
  */
 function validateLogin(){
+	if(document.getElementById("myModal").style.display=="block"){
+		closeAlertPopup();
+		return;
+	}
 	var username = document.getElementById("login-name");
 	var password = document.getElementById("login-pass");
 

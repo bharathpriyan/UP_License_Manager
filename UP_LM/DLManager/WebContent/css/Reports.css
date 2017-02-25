@@ -98,3 +98,26 @@ table.dataTable th {
     font-weight: bold;
     display: none;
 }
+#renewBtn:HOVER,#showExpiredBtn:HOVER,#hideExpiredbtn:HOVER {
+	color: orange;
+}
+#showExpiredBtn, #hideExpiredBtn{
+	border-radius: 5px;
+    background-color: #384C68;
+    font-size: 15px;
+    font-family: helvatica,Arial;
+    color: white;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    float: right;
+    width: 10%;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    margin: 0.8% 5% 0% 0%;
+}
+#hideExpiredbtn{
+	display: none;
+}

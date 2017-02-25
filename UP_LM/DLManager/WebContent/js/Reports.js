@@ -1,3 +1,9 @@
+var exDate = "";
+var popupMsg = document.getElementById('popupMsg');
+var modal = document.getElementById('myModal');
+var btn = document.getElementById("popupCloseBtnReports");
+var reloadBool = false;
+
 $(document).ready(function() {
 	if(getCookie("userName")!=null){
 		fetchReports();
@@ -15,16 +21,11 @@ $(document).ready(function() {
           closeAlertPopup();
         }
     });
+    logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
 });
 
-var exDate = "";
-var popupMsg = document.getElementById('popupMsg');
-var modal = document.getElementById('myModal');
-var btn = document.getElementById("popupCloseBtnReports");
-var reloadBool = false;
-
 function populatetable(returnData){
-	
+	document.getElementById("tableHolder").innerHTML = "";
 	var userArray = returnData;
 	
 	var dataTableText = '<table id="reportsTable"><thead><th>Name</th><th>License Number</th><th>Mobile Number</th><th>Expiry Date</th></thead><tbody>';
@@ -57,6 +58,44 @@ function fetchReports(){
 		//Assuming it is true
 		if(returnData){
 			populatetable(returnData);
+			document.getElementById("showExpiredBtn").style.display = "Inline-block";
+			document.getElementById("hideExpiredBtn").style.display = "none";
+		}else{
+			//alert("No customer matching the search criteria");
+			popupMsg.innerHTML = "No matching customer found for your search criteria";
+			modal.style.display = "block";
+			$("#renewBtn").css("display","none");
+		}
+	});
+}
+
+function displayExpired(){
+	//get records from Db with selected days
+	
+	$.get('FetchAllReports?days=-1', function(returnData) {
+		//Assuming it is true
+		if(returnData){
+			populatetable(returnData);
+			document.getElementById("hideExpiredBtn").style.display = "Inline-block";
+			document.getElementById("showExpiredBtn").style.display = "none";
+		}else{
+			//alert("No customer matching the search criteria");
+			popupMsg.innerHTML = "No matching customer found for your search criteria";
+			modal.style.display = "block";
+			//$("#renewBtn").css("display","none");
+		}
+	});
+}
+
+function hideExpired(){
+	//get records from Db with selected days
+	document.getElementById("reportDate").value = "30";
+	$.get('FetchAllReports?days=30', function(returnData) {
+		//Assuming it is true
+		if(returnData){
+			populatetable(returnData);
+			document.getElementById("showExpiredBtn").style.display = "Inline-block";
+			document.getElementById("hideExpiredBtn").style.display = "none";
 		}else{
 			//alert("No customer matching the search criteria");
 			popupMsg.innerHTML = "No matching customer found for your search criteria";
@@ -138,6 +177,13 @@ function renewSelectedUsers(){
 
 parent.$('html').click(function(event) {                
 	$("#settingsWrapper").css("display","none");
+	clearTimeout(logoutTimer);
+	logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
+});
+
+$('html').click(function(event) {                
+	clearTimeout(logoutTimer);
+	logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
 });
 
 //When the user clicks the button, open the modal 

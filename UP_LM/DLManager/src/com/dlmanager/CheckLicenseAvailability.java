@@ -8,14 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.uzhavupparai.dladmin.Admin;
 
 @SuppressWarnings("serial")
-public class CheckAvailability extends HttpServlet{
+public class CheckLicenseAvailability extends HttpServlet{
 
 	    public void doGet(HttpServletRequest request, HttpServletResponse response)
 	            throws javax.servlet.ServletException, java.io.IOException {
 	        try {
 	        	String lNumber = request.getParameter("lNumber");
 	        	Admin a=(Admin) request.getSession().getAttribute("validAdmin");
-	        	if(a.isLinceseUnique("LIC_NUM", lNumber)){
+	        	if(a.isLinceseUnique(lNumber)){
 	        		response.setContentType("text/plain");
 					response.setCharacterEncoding("UTF-8");
 					response.getWriter().write("true");

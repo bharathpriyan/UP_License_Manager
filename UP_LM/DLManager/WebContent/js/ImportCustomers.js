@@ -59,6 +59,7 @@ $(document).ready(function() {
           closeAlertPopup();
         }
     });
+    logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
 });
 
 function showMsg(event){
@@ -80,3 +81,13 @@ function showMsg(event){
 function hideMsg(){
 	$("#infoToUserContainer").css("display","none");
 }
+
+$('html').click(function(event) {                
+	clearTimeout(logoutTimer);
+	logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
+});
+
+parent.$('html').click(function(event) {                
+	clearTimeout(logoutTimer);
+	logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
+});

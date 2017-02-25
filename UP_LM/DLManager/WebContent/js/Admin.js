@@ -26,6 +26,7 @@ $(document).ready(function() {
 function resetInputs(){
 	document.getElementById("drivingSchoolName").value = "";
 	document.getElementById("firstName").value = "";
+	document.getElementById("userName").value = "";
 	document.getElementById("lastName").value = "";
 	document.getElementById("password").value = "";
 	document.getElementById("mobNumber").value = "";
@@ -151,4 +152,18 @@ function displayErrorMessage(elementName,msgToUser){
 	$("#infoToUserContainer").css("top",btnOffset.top-5);
 	$("#infoToUserContainer").css("left",btnOffset.left+460);
 	$("#infoToUserContainer").css("display","block");
+}
+
+function validateUserName(event){
+	document.getElementById("userName").style.border = "none";
+		var userName = document.getElementById("userName").value;
+		$.get('CheckAdminAvailability?lNumber='+userName, function(returnData) {
+			//True if already available
+			if(returnData!='true'){
+				displayErrorMessage("userName","Username is already available in our records!");
+				document.getElementById("userName").style.border = errorBorderHighlight;
+			}else{
+				return;
+			}
+		});
 }

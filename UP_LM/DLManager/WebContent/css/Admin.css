@@ -57,10 +57,10 @@ body
 #saveDetails
 {
 	border-radius: 5px;
-    background-color: #0c57f9;
+    background-color: #050505;
     font-size: 15px;
     font-family: helvatica,Arial;
-    color: white;
+    color: #FFF;
     text-align: center;
     height: 30px;
     line-height: 30px;
@@ -68,12 +68,17 @@ body
     float: right;
     width: 15%;
     margin-right: 20%;
+    font-weight: bold;
+}
+#saveDetails:HOVER{
+	color: orange;
 }
 #resetInputs{
 	border-radius: 5px;
-    background-color: #00363a;
+    background-color: #050505;
     font-size: 15px;
     font-family: helvatica,Arial;
+    font-weight: bold;
     color: white;
     text-align: center;
     height: 30px;

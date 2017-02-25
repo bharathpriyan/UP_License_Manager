@@ -39,7 +39,7 @@
 <tr><td class="userFieldLable"></td><td><input type="text" id="temporaryAddressLine2"  class="userInputClass tAddress" placeholder=" Address line 2"/>
 </td></tr>
 <tr><td class="userFieldLable"></td><td><input type="text" id="temporaryAddressPin"  class="userInputClass tAddress" placeholder=" Postal code" maxlength="6" onkeypress="return isNumberKey(event)"/></td></tr>
-<tr><td class="userFieldLable">License Number&nbsp;<span style="color:red;">*</span>:&nbsp;</td><td><input type="text" id="licenseNumber" class="userInputClass makeReadOnly" onblur="validateLicenseNumber();"/></td></tr>
+<tr><td class="userFieldLable">License Number&nbsp;<span style="color:red;">*</span>:&nbsp;</td><td><input type="text" id="licenseNumber" class="userInputClass makeReadOnly" onblur="validateLicenseNumber(this);"/></td></tr>
 <tr><td class="userFieldLable">License Type&nbsp;:&nbsp;</td>
 <td><select id="licenseType" class="makeReadOnly" onchange="captureLicenseType();">
 <option selected="selected" value="LMVH">LMVH</option>

@@ -51,6 +51,7 @@ $(window).resize(function(){
 	$("#settingsWrapper").css("display","none");
 });
 document.getElementById("appVersionSpan").innerHTML = appVersion;
+document.getElementById("loginNameSpan").innerHTML = getCookie("userName");
 });
 $('html').click(function(event) {                
 	if(! (event.target.className.indexOf("menuList") > -1)

@@ -27,3 +27,12 @@ table.dataTable th {
 #reportsTable{
 	height: 80%;
 }
+#reportsTable_filter{
+	background-color: #384C68;
+	color:white;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+#reportsTable_length{
+	margin-top: 1%;
+}

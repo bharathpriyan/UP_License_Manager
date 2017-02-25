@@ -25,6 +25,7 @@ $(document).ready(function() {
           closeAlertPopup();
         }
     });
+    logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
 });
 
 function populatetable(returnData){
@@ -47,4 +48,11 @@ function populatetable(returnData){
 
 parent.$("html").click(function() {                
 	parent.$("#settingsWrapper").css("display","none");
+	clearTimeout(logoutTimer);
+	logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
+});
+
+$('html').click(function(event) {                
+	clearTimeout(logoutTimer);
+	logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
 });

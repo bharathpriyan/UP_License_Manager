@@ -72,12 +72,12 @@
 		<url-pattern>/RenewUser</url-pattern>
 	</servlet-mapping>
 		<servlet>
-		<servlet-name>CheckAvailability</servlet-name>
-		<servlet-class>com.dlmanager.CheckAvailability</servlet-class>
+		<servlet-name>CheckLicenseAvailability</servlet-name>
+		<servlet-class>com.dlmanager.CheckLicenseAvailability</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>CheckAvailability</servlet-name>
-		<url-pattern>/CheckAvailability</url-pattern>
+		<servlet-name>CheckLicenseAvailability</servlet-name>
+		<url-pattern>/CheckLicenseAvailability</url-pattern>
 	</servlet-mapping>
 		<servlet>
 		<servlet-name>ImportFile</servlet-name>
@@ -86,5 +86,13 @@
 		<servlet-mapping>
 		<servlet-name>ImportFile</servlet-name>
 		<url-pattern>/uploadServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CheckAdminAvailability</servlet-name>
+		<servlet-class>com.dlmanager.CheckAdminAvailability</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckAdminAvailability</servlet-name>
+		<url-pattern>/CheckAdminAvailability</url-pattern>
 	</servlet-mapping>
 </web-app>

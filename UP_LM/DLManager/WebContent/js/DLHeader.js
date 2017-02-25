@@ -1,5 +1,4 @@
 var frameEl = document.getElementById("contentHolder");
-var logoutTimer = null;
 
 $(document).ready(function() {
 	$("#settingsWrapper").css("display","none");
@@ -10,11 +9,10 @@ $(document).ready(function() {
 		$("#searchUserTab").removeClass("tabsClassSelected");
 		$("#reportsTab").removeClass("tabsClassSelected");
 		document.getElementById("loginNameSpan").innerHTML = getCookie("userName");
-		logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
-		logoutListener();
+		//logoutListener(); //idhu next tab logout aaga
 	}
 	else{
-		proceedToLogout();
+		window.location.href = "Login.html";
 	}
 	$("#settingsIcon").click(function(){
 		var btnOffset = $("#settingsIcon").offset();
@@ -41,14 +39,12 @@ $(document).ready(function() {
 });
 
 $('html').click(function(event) {                
-	clearTimeout(logoutTimer);
-	logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
-	
 	if(! (event.target.className.indexOf("menuList") > -1)
 			&& ! (event.target.className.indexOf("square") > -1)
 			&& ! (event.target.id.indexOf("settingsIcon") > -1)){
 		$("#settingsWrapper").css("display","none");
 	}
+	clearTimeout(logoutTimer);
 });
 
 function showFreshLicenseForm(){

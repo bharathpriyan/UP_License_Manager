@@ -35,6 +35,10 @@ var makeBorderNone = "none";
 var ageLimitMin = 18;
 var ageLimitMax = 100;
 var licenseExpiryPeriodInYears = 20;
+/**
+ * inactivity related variables
+ */
+var logoutTimer = null;
 var logoutTimeinMS = 180000;
 
 var modal = document.getElementById('myModal');
@@ -49,7 +53,7 @@ function proceedToLogout(){
 	$.post('Logout?', function(returnData) {
 		//Assuming it is true
 		if(returnData=="true"){
-			location = "Login.html";		
+			window.parent.location.href = "Login.html";		
 		}
 	});
 	

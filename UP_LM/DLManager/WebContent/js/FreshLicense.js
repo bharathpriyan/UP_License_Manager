@@ -82,7 +82,7 @@ $(document).ready(function() {
 		}
 	}
 	else{
-		proceedToLogout();
+		parent.proceedToLogout();
 	}
 
     /**
@@ -94,7 +94,7 @@ $(document).ready(function() {
           closeAlertPopup();
         }
     });
-    
+    logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
 });
 
 function setFieldsForUserDetailUpdate(returnData){
@@ -503,14 +503,17 @@ function resetInputs(){
 	$(".tAddress").val("");
 	document.getElementById("licenseNumber").value = "";
 	document.getElementById("licenseType").value = "LMVH";
-	document.getElementById("dateOfBirth").value = "1998-01-07";
-
+	document.getElementById("dateOfBirth").value = "";
+	document.getElementById("issuedDate").value = "";
+	document.getElementById("expireDate").value = "";
 }
 /**
  * Display messages to the user
  */
 function displayErrorMessage(elementName,msgToUser){
-	$("#"+elementName).focus();
+	if(elementName!="licenseNumber"){
+		$("#"+elementName).focus();
+	}
 	var btnOffset = $("#"+elementName).offset();
 	infoToUserEl.innerHTML = msgToUser;
 
@@ -531,32 +534,39 @@ function updateAge(){
 	document.getElementById("age").value = ageCalculated;
 	ageToDB = ageCalculated;
 }
-
-/*function validateLicenseNumber(){
+ 
+function validateLicenseNumber(event){
+	document.getElementById("licenseNumber").style.border = "none";
 	if(userUpdateBool){
 		var licenseNumber = document.getElementById("licenseNumber").value;
-		$.get('CheckAvailability?lNumber='+licenseNumber, function(returnData) {
+		$.get('CheckLicenseAvailability?lNumber='+licenseNumber, function(returnData) {
 			//True if already available
 			if(returnData!='true'){
-				alert("License number is already available in our records!");
+				displayErrorMessage("licenseNumber","License number is already available in our records!");
+				document.getElementById("licenseNumber").style.border = errorBorderHighlight;
+				//document.getElementById("licenseNumber").value = "";
 			}else{
 				return;
 			}
 		});
 	}
-}*/
+}
 
 parent.$('html').click(function(event) {                
 	$("#settingsWrapper").css("display","none");
 	$("#infoToUserStatic").css("display","none");
 	$("#infoToUserContainer").css("display","none");
+	clearTimeout(logoutTimer);
+	logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
 });
 
 $('html').click(function(event) {                
 	$("#infoToUserStatic").css("display","none");
 	if(event.target.id !="saveDetails"){
-	$("#infoToUserContainer").css("display","none");
+	//$("#infoToUserContainer").css("display","none");
 	}
+	clearTimeout(logoutTimer);
+	logoutTimer = setTimeout(proceedToLogout,logoutTimeinMS);
 });
 
 function showMsg(event){
